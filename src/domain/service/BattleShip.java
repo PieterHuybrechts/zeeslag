@@ -20,10 +20,26 @@ public class BattleShip implements BoardGame{
 	public Dimension getBoardSize(){
 		return human.getBoard().getSize();
 	}
-
+	public String getNameHuman(){
+		return this.human.getName();
+	}
+	public String getNameComputer(){
+		
+	return this.computer.getName();
+	}
 	@Override
 	public void Start() {
 		//TODO implement
+	}
+
+	public void addHuman(String name) {
+		// TODO Auto-generated method stub
+		try {
+			this.human = new Human(name);
+		} catch (DomainException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

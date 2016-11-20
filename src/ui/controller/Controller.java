@@ -17,4 +17,11 @@ public class Controller {
 	public Dimension getBoardSize() {
 		return game.getBoardSize();
 	}
+	public BattleShip getBoardGame(){
+		return (BattleShip) game;
+		
+	}
+	public void addPlayer(String name){
+		this.getBoardGame().addHuman(name);
+	}
 }

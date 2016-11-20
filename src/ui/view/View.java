@@ -32,6 +32,14 @@ public class View extends JFrame{
 			JOptionPane.showMessageDialog(null, e.getMessage(),"Warning",JOptionPane.WARNING_MESSAGE);
 			System.exit(1);
 		}
+		String name = "Human";
+		try{
+		name = JOptionPane.showInputDialog("What is the name of the player?");
+		}
+		catch(Exception e){
+			
+		}
+		this.controller.addPlayer(name);
 		JPanel contentPanel = new JPanel();
 		contentPanel.setLayout(new BoxLayout(contentPanel,BoxLayout.X_AXIS));
 		this.setContentPane(contentPanel);
@@ -40,7 +48,7 @@ public class View extends JFrame{
 		JPanel player1Panel = new JPanel();
 		player1Panel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 5));
 		player1Panel.setLayout(new BoxLayout(player1Panel, BoxLayout.Y_AXIS));
-		JLabel player1NameLbl = new JLabel("player1");
+		JLabel player1NameLbl = new JLabel(this.controller.getBoardGame().getNameHuman());
 		player1Panel.add(player1NameLbl);
 		player1Panel.add(createButtonPanel());
 		contentPanel.add(player1Panel);
@@ -48,7 +56,7 @@ public class View extends JFrame{
 		JPanel player2Panel = new JPanel();
 		player2Panel.setBorder(BorderFactory.createEmptyBorder(0, 5, 10, 10));
 		player2Panel.setLayout(new BoxLayout(player2Panel, BoxLayout.Y_AXIS));
-		JLabel player2NameLbl = new JLabel("player2");
+		JLabel player2NameLbl = new JLabel(this.controller.getBoardGame().getNameComputer());
 		player2Panel.add(player2NameLbl);
 		player2Panel.add(createButtonPanel());
 		contentPanel.add(player2Panel);
