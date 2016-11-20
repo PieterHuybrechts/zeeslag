@@ -1,9 +1,11 @@
 package app;
 
-public class App {
+import ui.view.View;
 
+public class App {
+	
 	public static void main(String[] args){
-		System.out.println("test");
+		new View();
 	}
 	
 }
