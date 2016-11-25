@@ -4,9 +4,8 @@ public enum ShipEnum {
 	VLIEGDEKSCHIP ("Vliegdekschip", 5),
 	SLAGSCHIP ("Slagschip", 4),
 	ONDERZEEER ("Onderzeeër", 3),
-	TORPEDOBOOTJAGER ("Torpedobootjager", 3),
-	PATROUILLESCHIP ("Patrouilleschip", 2);
-	
+	TORPEDOBOOTJAGER ("Torpedobootjager", 3);	
+
 	private String name;
 	private int length;
 
