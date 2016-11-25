@@ -3,7 +3,7 @@ package ui.controller;
 import java.awt.Dimension;
 
 import domain.DomainException;
-import domain.service.BattleShip;
+import domain.service.BattleShipGame;
 import domain.service.BoardGame;
 
 public class Controller {
@@ -11,14 +11,14 @@ public class Controller {
 	private BoardGame game;
 	
 	public Controller() throws DomainException{
-		game = new BattleShip();
+		game = new BattleShipGame();
 	}
 
 	public Dimension getBoardSize() {
 		return game.getBoardSize();
 	}
-	public BattleShip getBoardGame(){
-		return (BattleShip) game;
+	public BattleShipGame getBoardGame(){
+		return (BattleShipGame) game;
 		
 	}
 	public void addPlayer(String name){

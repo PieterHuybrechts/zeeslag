@@ -7,12 +7,12 @@ import domain.model.Computer;
 import domain.model.Human;
 import domain.model.Player;
 
-public class BattleShip implements BoardGame{
+public class BattleShipGame implements BoardGame{
 
 	private Player human;
 	private Player computer;
 	
-	public BattleShip() throws DomainException{
+	public BattleShipGame() throws DomainException{
 		human = new Human("Human");
 		computer = new Computer("Computer");
 	}
