@@ -4,23 +4,24 @@ import java.awt.Dimension;
 
 import domain.DomainException;
 import domain.service.BattleShipGame;
-import domain.service.BoardGame;
+import domain.service.GameFacade;
 
 public class Controller {
 
-	private BoardGame game;
+	private GameFacade facade;
 	
 	public Controller() throws DomainException{
-		game = new BattleShipGame();
+		facade = new GameFacade();
 	}
 
 	public Dimension getBoardSize() {
-		return game.getBoardSize();
+		return facade.getBoardSize();
 	}
+
 	public BattleShipGame getBoardGame(){
-		return (BattleShipGame) game;
-		
+		return (BattleShipGame) facade.getBoardGame();	
 	}
+
 	public void addPlayer(String name){
 		this.getBoardGame().addHuman(name);
 	}
