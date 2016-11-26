@@ -1,7 +1,9 @@
 package domain.service;
 
 import domain.DomainException;
+import domain.model.Ship;
 import domain.model.lib.BoardDimension;
+import domain.model.lib.Position;
 
 public class GameFacade {
 
@@ -10,7 +12,7 @@ public class GameFacade {
 	public GameFacade() {
 		//TODO throws DomainException
 		try {
-			game = new BattleShipGame();
+			game = new BSGame();
 		} catch (DomainException e) {
 			e.printStackTrace();
 		}
@@ -20,8 +22,8 @@ public class GameFacade {
 		return game.getBoardSize();
 	}
 
-	public BattleShipGame getBoardGame(){
-		return (BattleShipGame) game;	
+	public BSGame getBoardGame(){
+		return (BSGame) game;	
 	}
 
 	public void addPlayer(String name) throws DomainException{
@@ -34,5 +36,9 @@ public class GameFacade {
 
 	public String getNameHuman() {
 		return this.getBoardGame().getNameHuman();
+	}
+
+	public void addShip(Ship ship, Position position) {
+		this.getBoardGame().addPion(ship, position);
 	}
 }

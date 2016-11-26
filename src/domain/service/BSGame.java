@@ -5,13 +5,14 @@ import domain.model.Computer;
 import domain.model.Human;
 import domain.model.Player;
 import domain.model.lib.BoardDimension;
+import domain.model.lib.Position;
 
-public class BattleShipGame implements BoardGame{
+public class BSGame implements BoardGame{
 
 	private Player human;
 	private Player computer;
 	
-	public BattleShipGame() throws DomainException{
+	public BSGame() throws DomainException{
 		human = new Human("Human");
 		computer = new Computer("Computer");
 	}
@@ -26,6 +27,7 @@ public class BattleShipGame implements BoardGame{
 		
 	return this.computer.getName();
 	}
+
 	@Override
 	public void Start() {
 		//TODO implement
@@ -34,5 +36,9 @@ public class BattleShipGame implements BoardGame{
 	public void addHuman(String name) throws DomainException {
 		this.human = new Human(name);
 	}
-	
+
+	@Override
+	public void addPion(Object pion, Position position) {
+		//TODO addShip in human
+	}
 }

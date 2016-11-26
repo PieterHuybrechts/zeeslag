@@ -28,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="domain.service.BattleShipGame" project="Zeeslag" 
-    file="/Zeeslag/src/domain/service/BattleShipGame.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="domain.service.BSGame" project="Zeeslag" 
+    file="/Zeeslag/src/domain/service/BSGame.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="917" y="104"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
