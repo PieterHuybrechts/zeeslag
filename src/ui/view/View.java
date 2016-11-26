@@ -17,10 +17,7 @@ import domain.DomainException;
 import ui.controller.Controller;
 
 public class View extends JFrame{
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -7999885517041228366L;
 	
 	private Controller controller;
@@ -32,14 +29,19 @@ public class View extends JFrame{
 			JOptionPane.showMessageDialog(null, e.getMessage(),"Warning",JOptionPane.WARNING_MESSAGE);
 			System.exit(1);
 		}
-		String name = "Human";
-		try{
-		name = JOptionPane.showInputDialog("What is the name of the player?");
+		
+		while(true){
+			try{
+				String name = JOptionPane.showInputDialog(null, "What is your name?");
+				if(name == null)
+					System.exit(1);
+				this.controller.addPlayer(name);		
+				break;
+			}catch(DomainException e){
+				JOptionPane.showMessageDialog(null, e.getMessage(),"Warning",JOptionPane.WARNING_MESSAGE);
+			}
 		}
-		catch(Exception e){
-			
-		}
-		this.controller.addPlayer(name);
+		
 		JPanel contentPanel = new JPanel();
 		contentPanel.setLayout(new BoxLayout(contentPanel,BoxLayout.X_AXIS));
 		this.setContentPane(contentPanel);

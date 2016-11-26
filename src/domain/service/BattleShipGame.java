@@ -32,14 +32,8 @@ public class BattleShipGame implements BoardGame{
 		//TODO implement
 	}
 
-	public void addHuman(String name) {
-		// TODO Auto-generated method stub
-		try {
-			this.human = new Human(name);
-		} catch (DomainException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void addHuman(String name) throws DomainException {
+		this.human = new Human(name);
 	}
 	
 }

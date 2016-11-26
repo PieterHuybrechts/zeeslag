@@ -22,7 +22,7 @@ public class Controller {
 		return (BattleShipGame) facade.getBoardGame();	
 	}
 
-	public void addPlayer(String name){
+	public void addPlayer(String name) throws DomainException{
 		this.getBoardGame().addHuman(name);
 	}
 }
