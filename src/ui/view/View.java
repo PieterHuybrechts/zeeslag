@@ -50,7 +50,7 @@ public class View extends JFrame{
 		JPanel player1Panel = new JPanel();
 		player1Panel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 5));
 		player1Panel.setLayout(new BoxLayout(player1Panel, BoxLayout.Y_AXIS));
-		JLabel player1NameLbl = new JLabel(this.controller.getBoardGame().getNameHuman());
+		JLabel player1NameLbl = new JLabel(this.controller.getNameHuman());
 		player1Panel.add(player1NameLbl);
 		player1Panel.add(createButtonPanel());
 		contentPanel.add(player1Panel);
@@ -58,7 +58,7 @@ public class View extends JFrame{
 		JPanel player2Panel = new JPanel();
 		player2Panel.setBorder(BorderFactory.createEmptyBorder(0, 5, 10, 10));
 		player2Panel.setLayout(new BoxLayout(player2Panel, BoxLayout.Y_AXIS));
-		JLabel player2NameLbl = new JLabel(this.controller.getBoardGame().getNameComputer());
+		JLabel player2NameLbl = new JLabel(this.controller.getNameComputer());
 		player2Panel.add(player2NameLbl);
 		player2Panel.add(createButtonPanel());
 		contentPanel.add(player2Panel);

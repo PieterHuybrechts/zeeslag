@@ -28,4 +28,12 @@ public class GameFacade {
 	public void addPlayer(String name) throws DomainException{
 		this.getBoardGame().addHuman(name);
 	}
+
+	public String getNameComputer() {
+		return this.getBoardGame().getNameComputer();
+	}
+
+	public String getNameHuman() {
+		return this.getBoardGame().getNameHuman();
+	}
 }
