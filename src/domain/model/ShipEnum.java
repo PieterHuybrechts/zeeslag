@@ -22,4 +22,8 @@ public enum ShipEnum {
 	public int getLength() {
 		return this.length;
 	}
+	
+	public String toString(){
+		return getName()+" ("+getLength()+")";
+	}
 }
