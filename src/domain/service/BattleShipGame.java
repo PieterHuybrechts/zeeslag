@@ -1,11 +1,10 @@
 package domain.service;
 
-import java.awt.Dimension;
-
 import domain.DomainException;
 import domain.model.Computer;
 import domain.model.Human;
 import domain.model.Player;
+import domain.model.lib.BoardDimension;
 
 public class BattleShipGame implements BoardGame{
 
@@ -17,7 +16,7 @@ public class BattleShipGame implements BoardGame{
 		computer = new Computer("Computer");
 	}
 	
-	public Dimension getBoardSize(){
+	public BoardDimension getBoardSize(){
 		return human.getBoard().getSize();
 	}
 	public String getNameHuman(){

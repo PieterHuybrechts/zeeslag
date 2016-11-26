@@ -1,10 +1,10 @@
 package domain.service;
 
-import java.awt.Dimension;
+import domain.model.lib.BoardDimension;
 
 public interface BoardGame {
 
 	public void Start();
-	public Dimension getBoardSize();
+	public BoardDimension getBoardSize();
 	
 }

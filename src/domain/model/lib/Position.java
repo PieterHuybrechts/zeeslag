@@ -5,14 +5,16 @@ public class Position {
 	private int x, y;
 
 	/**
-	 * Constructs and initializes a position at the origin (0,0) of the coordinate space.
+	 * Constructs and initializes a position at the origin (0,0)
+	 * of the coordinate space.
 	 */
 	public Position() {
 		this.setLocation(0, 0);
 	}
 
 	/**
-	 * Constructs and initializes a position at the specified (x,y) location in the coordinate space.
+	 * Constructs and initializes a position at the specified (x,y)
+	 * location in the coordinate space.
 	 * 
 	 * @param x: the X coordinate of the newly constructed Position.
 	 * @param y: the Y coordinate of the newly constructed Position.
@@ -22,7 +24,8 @@ public class Position {
 	}
 
 	/**
-	 * Constructs and initializes a position with the same location as the specified Position object.
+	 * Constructs and initializes a position with the same location
+	 * as the specified Position object.
 	 * 
 	 * @param p: a point.
 	 */
@@ -46,7 +49,7 @@ public class Position {
 	/**
 	 * Returns the location of this position.
 	 * 
-	 * @return this point
+	 * @return this point.
 	 */
 	public Position getLocation() {
 		return this;
@@ -71,7 +74,8 @@ public class Position {
 	}
 
 	/**
-	 * Moves this position to the specified location in the (x,y) coordinate plane.
+	 * Moves this position to the specified location in the (x,y)
+	 * coordinate plane.
 	 * 
 	 * @param x: an integer, the new X coordinate for this position.
 	 * @param y: an integer, the new Y coordinate for this position.

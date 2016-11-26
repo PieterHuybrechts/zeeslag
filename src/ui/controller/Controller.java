@@ -1,8 +1,7 @@
 package ui.controller;
 
-import java.awt.Dimension;
-
 import domain.DomainException;
+import domain.model.lib.BoardDimension;
 import domain.service.GameFacade;
 
 public class Controller {
@@ -13,7 +12,7 @@ public class Controller {
 		facade = new GameFacade();
 	}
 
-	public Dimension getBoardSize() {
+	public BoardDimension getBoardSize() {
 		return facade.getBoardSize();
 	}
 

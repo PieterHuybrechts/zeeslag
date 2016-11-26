@@ -1,8 +1,7 @@
 package domain.service;
 
-import java.awt.Dimension;
-
 import domain.DomainException;
+import domain.model.lib.BoardDimension;
 
 public class GameFacade {
 
@@ -17,7 +16,7 @@ public class GameFacade {
 		}
 	}
 
-	public Dimension getBoardSize() {
+	public BoardDimension getBoardSize() {
 		return game.getBoardSize();
 	}
 
