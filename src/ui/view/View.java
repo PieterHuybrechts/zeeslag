@@ -1,14 +1,10 @@
 package ui.view;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.image.ColorModel;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -24,6 +20,7 @@ import javax.swing.JRadioButton;
 import domain.DomainException;
 import domain.model.ShipEnum;
 import ui.controller.Controller;
+import ui.view.panels.PlayerPanel;
 
 public class View extends JFrame{
 
@@ -31,16 +28,16 @@ public class View extends JFrame{
 	
 	private Controller controller;
 	
-	private JPanel player1Panel;
-	private JPanel player2Panel;
+	private PlayerPanel player1Panel;
+	private PlayerPanel player2Panel;
 	private JComboBox<ShipEnum> shipTypeCB;
 	private JRadioButton horzRadio;
 	private JRadioButton vertRadio;
 	
-	Color backGroundColor;
-	
 	public View(){		
-		backGroundColor = new JButton().getBackground();
+	
+		settingsChangedListener settingsListener = new settingsChangedListener();
+		
 		try{
 			controller = new Controller();			
 		}catch(DomainException e){
@@ -76,58 +73,41 @@ public class View extends JFrame{
 		leftPanel.add(beschikbareSchepenLbl);
 		
 		shipTypeCB = new JComboBox<ShipEnum>(ShipEnum.values());
+		shipTypeCB.addActionListener(settingsListener);
 		leftPanel.add(shipTypeCB);
-		
 		
 		JPanel tussenPanel = new JPanel();
 		leftPanel.add(tussenPanel);
 		
-		
 		JLabel richtinLbl = new JLabel("Richting");
 		leftPanel.add(richtinLbl);
-		
 		
 		JPanel radioButtonPanel = new JPanel();
 		leftPanel.add(radioButtonPanel);
 		radioButtonPanel.setLayout(new BoxLayout(radioButtonPanel, BoxLayout.X_AXIS));
-		
 		horzRadio = new JRadioButton("Horizontal");
+		horzRadio.addActionListener(settingsListener);
 		radioButtonPanel.add(horzRadio);
-		
 		vertRadio = new JRadioButton("Vertical");
+		vertRadio.addActionListener(settingsListener);
 		radioButtonPanel.add(vertRadio);
-		
 		ButtonGroup btnGroup = new ButtonGroup();
 		btnGroup.add(horzRadio);
 		btnGroup.add(vertRadio);
-		
 		horzRadio.setSelected(true);
-		
 		contentPanel.add(leftPanel);
 		
+		//PlayerPanels
 		
-		//Player1Panel
-		
-		player1Panel = new JPanel();
+		player1Panel = new PlayerPanel(this.controller.getNameHuman(), this.controller.getBoardSize().getWidth(),this.controller.getBoardSize().getHeight());
 		player1Panel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 5));
-		player1Panel.setLayout(new BoxLayout(player1Panel, BoxLayout.Y_AXIS));
-		JLabel player1NameLbl = new JLabel(this.controller.getNameHuman());
-		player1Panel.add(player1NameLbl);
-		player1Panel.add(createButtonPanel());
+		player1Panel.setPlayerBoard(true);
 		contentPanel.add(player1Panel);
 		
-		//player2panel
-		
-		player2Panel = new JPanel();
+		player2Panel = new PlayerPanel(this.controller.getNameComputer(), this.controller.getBoardSize().getWidth(),this.controller.getBoardSize().getHeight());
 		player2Panel.setBorder(BorderFactory.createEmptyBorder(0, 5, 10, 10));
-		player2Panel.setLayout(new BoxLayout(player2Panel, BoxLayout.Y_AXIS));
-		JLabel player2NameLbl = new JLabel(this.controller.getNameComputer());
-		player2Panel.add(player2NameLbl);
-		player2Panel.add(createButtonPanel());
+		player2Panel.setPlayerBoard(false);
 		contentPanel.add(player2Panel);
-		
-		
-	
 		
 		//show frame
 		
@@ -135,32 +115,11 @@ public class View extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setMinimumSize(this.getSize());
+		settingsListener.actionPerformed(new ActionEvent(horzRadio, 0, ""));
 		this.setVisible(true);
-		
-	
 	}
 	
-	private JPanel createButtonPanel(){
-		int length=(int)controller.getBoardSize().getWidth();
-		int height=(int)controller.getBoardSize().getHeight();
-
-		JPanel buttonPanel = new JPanel(new GridLayout(length,height));
-		
-		for(int i=0;i<length;i++){
-			for(int j=0;j<height;j++){
-				GridBagConstraints gbc = new GridBagConstraints();
-				gbc.gridx=i;
-				gbc.gridy=j;
-				JButton tempButton = new JButton();
-				tempButton.addMouseListener(new BtnHoverListener());
-				tempButton.setPreferredSize(new Dimension(20,20));
-				buttonPanel.add(tempButton,gbc);
-			}
-		}
-		
-		
-		return buttonPanel;
-	}
+	
 	
 	private GridBagConstraints createGbc(int x,int y){
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -175,44 +134,19 @@ public class View extends JFrame{
 		return gbc;
 	}
 	
-	private class BtnHoverListener implements MouseListener{
+	private class settingsChangedListener implements ActionListener{
 
 		@Override
-		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			JButton btn = (JButton)e.getSource();
-			btn.setBackground(new Color(255,255,255));
-			ShipEnum type = (ShipEnum) shipTypeCB.getSelectedItem();
-			
-		
-			
-			/*if(horzRadio.isSelected()){
-				
+		public void actionPerformed(ActionEvent e) {
+			if(horzRadio.isSelected()){
+				player1Panel.setShipPlaceOrientation(PlayerPanel.HORZ);
 			}else if(vertRadio.isSelected()){
-				
-			}*/
+				player1Panel.setShipPlaceOrientation(PlayerPanel.VERT);
+			}
+			
+			player1Panel.setCurrentShipTypePlacement((ShipEnum)shipTypeCB.getSelectedItem());
+			
 		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			JButton btn = (JButton)e.getSource();
-			btn.setBackground(backGroundColor);
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-		}
-
 		
 	}
 	
