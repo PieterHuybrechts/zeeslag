@@ -26,20 +26,19 @@ public class View extends JFrame{
 	private Controller controller;
 	
 	public View(){
+	
 		try{
-			controller = new Controller();			
+			controller = new Controller();	
+			String name = JOptionPane.showInputDialog("What is the name of the player?");
+			this.controller.addPlayer(name);
 		}catch(DomainException e){
 			JOptionPane.showMessageDialog(null, e.getMessage(),"Warning",JOptionPane.WARNING_MESSAGE);
 			System.exit(1);
 		}
-		String name = "Human";
-		try{
-		name = JOptionPane.showInputDialog("What is the name of the player?");
-		}
 		catch(Exception e){
-			
+			System.exit(1);
 		}
-		this.controller.addPlayer(name);
+		
 		JPanel contentPanel = new JPanel();
 		contentPanel.setLayout(new BoxLayout(contentPanel,BoxLayout.X_AXIS));
 		this.setContentPane(contentPanel);
