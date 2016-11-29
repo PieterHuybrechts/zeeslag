@@ -3,6 +3,7 @@ package ui.controller;
 import domain.DomainException;
 import domain.model.Ship;
 import domain.model.ShipEnum;
+import domain.model.ShipOrientationEnum;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
 import domain.service.GameFacade;
@@ -26,8 +27,8 @@ public class Controller {
 		this.facade.addPlayer(name);
 	}
 
-	public void addShip(ShipEnum type, Position position) {
-		this.facade.addShip(new Ship(type), position);
+	public void addShip(ShipEnum type, Position position, ShipOrientationEnum orientation) {
+		this.facade.addShip(new Ship(type), position, orientation);
 	}
 	
 

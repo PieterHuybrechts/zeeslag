@@ -4,6 +4,7 @@ import domain.DomainException;
 import domain.model.Computer;
 import domain.model.Human;
 import domain.model.Player;
+import domain.model.ShipOrientationEnum;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
 
@@ -38,7 +39,7 @@ public class BSGame implements BoardGame{
 	}
 
 	@Override
-	public void addPion(Object pion, Position position) {
+	public void addPion(Object pion, Position position, ShipOrientationEnum orientation) {
 		//TODO addShip in human
 	}
 }
