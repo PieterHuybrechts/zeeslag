@@ -1,6 +1,5 @@
 package ui.view.panels;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -9,19 +8,11 @@ import javax.swing.JPanel;
 import domain.model.ShipEnum;
 
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import javax.swing.SwingConstants;
-
-import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.SharedInputStream;
-
 
 public class PlayerPanel extends JPanel{
 
@@ -41,35 +32,34 @@ public class PlayerPanel extends JPanel{
 	public static final int VERT = 1;
 	
 	public PlayerPanel(String playerName,int width,int height){
-		
 		boardWidth = width;
 		boardHeight = height;
 		playerBoard = false;
 		buttonArray = new JButton[10][10];		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		JPanel panel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+		JPanel contentPanel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) contentPanel.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
-		add(panel);
+		add(contentPanel);
 		
 		JLabel nameLbl = new JLabel(playerName);
-		panel.add(nameLbl);
-
-		JPanel buttonPanel = new JPanel(new GridLayout(width,height));
-		for(int i=0;i<width;i++){
-			for(int j=0;j<height;j++){
-				GridBagConstraints gbc = new GridBagConstraints();
-				gbc.gridx=i;
-				gbc.gridy=j;
+		contentPanel.add(nameLbl);
+		
+		JPanel buttonPanel = new JPanel(new GridLayout(height,width));
+		for(int y=0;y<height;y++){
+			for(int x=0;x<width;x++){
+				//y=row
+				//x=column
 				JButton tempButton = new JButton();
-				tempButton.setActionCommand(i+";"+j);
+				tempButton.setActionCommand(x+";"+y);
 				tempButton.addMouseListener(new BtnHoverListener());
 				tempButton.setPreferredSize(new Dimension(20,20));
-				buttonPanel.add(tempButton,gbc);
-				buttonArray[i][j] = tempButton;
+				buttonPanel.add(tempButton);
+				buttonArray[x][y] = tempButton;
 			}
 		}
+		
 		add(buttonPanel);
 	}
 	
@@ -93,49 +83,18 @@ public class PlayerPanel extends JPanel{
 		return playerBoard;
 	}
 	
-	@Override
-	public void setEnabled(boolean enabled){
-		super.setEnabled(enabled);
-		
-		for(int i=0;i<buttonArray.length;i++){
-			for(int j=0;j<buttonArray[0].length;j++){
-				buttonArray[i][j].setEnabled(enabled);
-			}
-		}
-		
-	}
-	
 	private class BtnHoverListener implements MouseListener{
-
 		@Override
-		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			if(isPlayerBoard()){
-				JButton btn = (JButton)e.getSource();
-				btn.setBackground(new Color(255,255,255));
-				String pos = btn.getActionCommand();
-				int x = Integer.parseInt(pos.substring(0, pos.indexOf(';')));
-				int y = Integer.parseInt(pos.substring(pos.indexOf(';')+1,pos.length()));
-				int length = selectedShipType.getLength();
-				
-				for(int i=0;i<length;i++){
-					if(selectedOrientation == HORZ){
-						if(x+i<boardWidth)
-							buttonArray[x+i][y].setBackground(new Color(255,255,255));
-					}else if(selectedOrientation == VERT){
-						if(y+i<boardHeight)
-							buttonArray[x][y+i].setBackground(new Color(255,255,255));
-					}
-				}
-			}
+		public void mouseEntered(MouseEvent e) {			
+			changeColor(e,new Color(255,255,255));
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
+			changeColor(e,btnBackGroundColor);
+		}
+		
+		private void changeColor(MouseEvent e,Color c){
 			if(isPlayerBoard()){	
 				JButton btn = (JButton)e.getSource();
 				btn.setBackground(new Color(255,255,255));
@@ -147,26 +106,23 @@ public class PlayerPanel extends JPanel{
 				for(int i=0;i<length;i++){
 					if(selectedOrientation == HORZ){
 						if(x+i<boardWidth)
-							buttonArray[x+i][y].setBackground(btnBackGroundColor);
+							buttonArray[x+i][y].setBackground(c);
 					}else if(selectedOrientation == VERT){
 						if(y+i<boardHeight)
-							buttonArray[x][y+i].setBackground(btnBackGroundColor);
+							buttonArray[x][y+i].setBackground(c);
 					}
 				}
 			}
 		}
 
 		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-		}
+		public void mousePressed(MouseEvent e) {}
 
 		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-		}
+		public void mouseReleased(MouseEvent e) {}
 
-		
+		@Override
+		public void mouseClicked(MouseEvent e) {}		
 	}
 	
 }
