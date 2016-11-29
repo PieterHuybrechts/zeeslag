@@ -89,14 +89,12 @@ public class View extends JFrame {
 
 		// PlayerPanels
 
-		player1Panel = new PlayerPanel(this.controller.getNameHuman(), this.controller.getBoardSize().getWidth(),this.controller.getBoardSize().getHeight());
+		player1Panel = new PlayerPanel(controller,true);
 		player1Panel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 5));
-		player1Panel.setPlayerBoard(true);
 		contentPanel.add(player1Panel);
 
-		player2Panel = new PlayerPanel(this.controller.getNameComputer(), this.controller.getBoardSize().getWidth(),this.controller.getBoardSize().getHeight());
+		player2Panel = new PlayerPanel(controller,false);
 		player2Panel.setBorder(BorderFactory.createEmptyBorder(0, 5, 10, 10));
-		player2Panel.setPlayerBoard(false);
 		contentPanel.add(player2Panel);
 
 		// show frame
@@ -113,12 +111,12 @@ public class View extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (horzRadio.isSelected()) {
-				player1Panel.setShipPlaceOrientation(PlayerPanel.HORZ);
+				player1Panel.setCurrentShipOrientation(PlayerPanel.HORZ);
 			} else if (vertRadio.isSelected()) {
-				player1Panel.setShipPlaceOrientation(PlayerPanel.VERT);
+				player1Panel.setCurrentShipOrientation(PlayerPanel.VERT);
 			}
 
-			player1Panel.setCurrentShipTypePlacement((ShipEnum) shipTypeCB.getSelectedItem());
+			player1Panel.setCurrentShipType((ShipEnum) shipTypeCB.getSelectedItem());
 		}
 	}
 }

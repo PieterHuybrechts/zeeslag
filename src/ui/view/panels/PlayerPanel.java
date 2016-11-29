@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import domain.model.ShipEnum;
+import domain.model.lib.Position;
+import ui.controller.Controller;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -24,17 +26,19 @@ public class PlayerPanel extends JPanel{
 	private int selectedOrientation;
 	private ShipEnum selectedShipType;
 	private JButton[][] buttonArray;
-	private boolean playerBoard;
+	private boolean humanPlayer;
 	private int boardWidth;
 	private int boardHeight;
+	private Controller controller;
 	
 	public static final int HORZ = 0;
 	public static final int VERT = 1;
 	
-	public PlayerPanel(String playerName,int width,int height){
-		boardWidth = width;
-		boardHeight = height;
-		playerBoard = false;
+	public PlayerPanel(Controller c,boolean humanPlayer){
+		controller = c;
+		boardWidth = c.getBoardSize().getWidth();
+		boardHeight = c.getBoardSize().getHeight();
+		this.humanPlayer = humanPlayer;
 		buttonArray = new JButton[10][10];		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
@@ -43,12 +47,18 @@ public class PlayerPanel extends JPanel{
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		add(contentPanel);
 		
-		JLabel nameLbl = new JLabel(playerName);
+		String name;
+		if(humanPlayer)
+			name = c.getNameHuman();
+		else
+			name = c.getNameComputer();
+		
+		JLabel nameLbl = new JLabel(name);
 		contentPanel.add(nameLbl);
 		
-		JPanel buttonPanel = new JPanel(new GridLayout(height,width));
-		for(int y=0;y<height;y++){
-			for(int x=0;x<width;x++){
+		JPanel buttonPanel = new JPanel(new GridLayout(boardHeight,boardWidth));
+		for(int y=0;y<boardHeight;y++){
+			for(int x=0;x<boardWidth;x++){
 				//y=row
 				//x=column
 				JButton tempButton = new JButton();
@@ -63,7 +73,7 @@ public class PlayerPanel extends JPanel{
 		add(buttonPanel);
 	}
 	
-	public void setShipPlaceOrientation(int arg0){
+	public void setCurrentShipOrientation(int arg0){
 		if(arg0!= HORZ && arg0!=VERT){
 			arg0=HORZ;
 		}
@@ -71,16 +81,12 @@ public class PlayerPanel extends JPanel{
 		selectedOrientation = arg0;
 	}
 	
-	public void setCurrentShipTypePlacement(ShipEnum shipType){
+	public void setCurrentShipType(ShipEnum shipType){
 		selectedShipType = shipType;
 	}
 	
-	public void setPlayerBoard(boolean playerBoard) {
-		this.playerBoard = playerBoard;
-	}
-	
 	public boolean isPlayerBoard() {
-		return playerBoard;
+		return humanPlayer;
 	}
 	
 	private class BtnHoverListener implements MouseListener{
@@ -122,7 +128,14 @@ public class PlayerPanel extends JPanel{
 		public void mouseReleased(MouseEvent e) {}
 
 		@Override
-		public void mouseClicked(MouseEvent e) {}		
+		public void mouseClicked(MouseEvent e) {
+			JButton button = (JButton)e.getComponent();
+			String pos = button.getActionCommand();
+			int x = Integer.parseInt(pos.substring(0, pos.indexOf(';')));
+			int y = Integer.parseInt(pos.substring(pos.indexOf(';')+1,pos.length()));
+			
+			controller.addShip(selectedShipType, new Position(x, y));
+		}		
 	}
 	
 }
