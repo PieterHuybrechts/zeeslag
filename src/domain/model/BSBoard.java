@@ -1,6 +1,7 @@
 package domain.model;
 
 import domain.model.lib.BoardDimension;
+import domain.model.lib.Position;
 
 public class BSBoard implements Board{
 	
@@ -23,5 +24,9 @@ public class BSBoard implements Board{
 
 	private void setField(int[][] field) {
 		this.field = field;
+	}
+	public void addShip(Ship ship, Position position, ShipOrientationEnum orientation){
+		//TODO must be implmented
+		
 	}
 }

@@ -1,6 +1,7 @@
 package domain.model;
 
 import domain.DomainException;
+import domain.model.lib.Position;
 
 public abstract class Player {
 
@@ -26,7 +27,9 @@ public abstract class Player {
 	public Board getBoard(){
 		return this.board;
 	}
-	
+	public BSBoard getBSBoard(){
+		return (BSBoard) this.board;
+	}
 	protected void setBoard(Board board) throws DomainException{
 		if(board==null){
 			throw new DomainException();
@@ -34,5 +37,5 @@ public abstract class Player {
 		
 		this.board = board;
 	}
-	
+	public abstract void addShip(Ship ship, Position position, ShipOrientationEnum orientation);
 }

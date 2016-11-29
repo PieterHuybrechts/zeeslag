@@ -38,7 +38,7 @@ public class GameFacade {
 	public String getNameHuman() {
 		return this.getBoardGame().getNameHuman();
 	}
-
+	
 	public void addShip(Ship ship, Position position,ShipOrientationEnum orientation) {
 		this.getBoardGame().addPion(ship, position,orientation);
 	}
