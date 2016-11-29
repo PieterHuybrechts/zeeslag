@@ -68,6 +68,7 @@ public class View extends JFrame{
 		}
 		
 		//ContentPane
+
 		
 		JPanel contentPanel = new JPanel();
 		contentPanel.setLayout(new BoxLayout(contentPanel,BoxLayout.X_AXIS));
@@ -155,9 +156,9 @@ public class View extends JFrame{
 			}
 			
 			player1Panel.setCurrentShipTypePlacement((ShipEnum)shipTypeCB.getSelectedItem());
-			
-		}
 		
 	}
 	
-}
+} }
+
+
