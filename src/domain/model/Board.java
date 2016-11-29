@@ -1,9 +1,9 @@
 package domain.model;
 
-import java.awt.Dimension;
+import domain.model.lib.BoardDimension;
 
 public interface Board {
-	
-	public Dimension getSize();
+
+	public BoardDimension getSize();
 	
 }

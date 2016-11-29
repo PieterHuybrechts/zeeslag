@@ -1,10 +1,11 @@
 package domain.service;
 
-import java.awt.Dimension;
+import domain.model.lib.BoardDimension;
+import domain.model.lib.Position;
 
 public interface BoardGame {
 
 	public void Start();
-	public Dimension getBoardSize();
-	
+	public BoardDimension getBoardSize();
+	public void addPion(Object pion, Position position);
 }

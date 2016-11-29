@@ -1,27 +1,50 @@
 package ui.controller;
 
-import java.awt.Dimension;
-
 import domain.DomainException;
-import domain.service.BattleShip;
-import domain.service.BoardGame;
+import domain.model.Ship;
+import domain.model.ShipEnum;
+import domain.model.lib.BoardDimension;
+import domain.model.lib.Position;
+import domain.service.GameFacade;
 
 public class Controller {
 
-	private BoardGame game;
+	private GameFacade facade;
 	
 	public Controller() throws DomainException{
-		game = new BattleShip();
+		facade = new GameFacade();
 	}
 
-	public Dimension getBoardSize() {
-		return game.getBoardSize();
+	
+
+	/*************************
+	 *    ADD INFORMATION    *
+	 *************************/
+
+
+	public void addPlayer(String name) throws DomainException{
+		this.facade.addPlayer(name);
 	}
-	public BattleShip getBoardGame(){
-		return (BattleShip) game;
-		
+
+	public void addShip(ShipEnum type, Position position) {
+		this.facade.addShip(new Ship(type), position);
 	}
-	public void addPlayer(String name){
-		this.getBoardGame().addHuman(name);
+	
+
+	/*************************
+	 *    GET INFORMATION    *
+	 *************************/
+
+
+	public BoardDimension getBoardSize() {
+		return facade.getBoardSize();
+	}
+
+	public String getNameComputer() {
+		return facade.getNameComputer();
+	}
+
+	public String getNameHuman() {
+		return facade.getNameHuman();
 	}
 }

@@ -1,24 +1,27 @@
 package domain.model;
 
-import java.awt.Dimension;
+import domain.model.lib.BoardDimension;
 
 public class BSBoard implements Board{
 	
-	private int[][] board;
+	private int[][] field;
+	private BoardDimension dimension;
 	
 	public BSBoard(){
-		board = new int[10][10];
-	}
-	
-	private void setBoard(int[][] board) {
-		this.board = board;
+		setField(new int[10][10]);
+		dimension = new BoardDimension(10, 10);
 	}
 
 	@Override
-	public Dimension getSize() {
-		return new Dimension(board.length,board[0].length);
+	public BoardDimension getSize() {
+		return dimension;
 	}
-	
-	
-	
+
+	public int[][] getField() {
+		return field;
+	}
+
+	private void setField(int[][] field) {
+		this.field = field;
+	}
 }
