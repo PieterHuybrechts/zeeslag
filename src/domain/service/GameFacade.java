@@ -2,6 +2,7 @@ package domain.service;
 
 import domain.DomainException;
 import domain.model.Ship;
+import domain.model.ShipOrientationEnum;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
 
@@ -38,7 +39,7 @@ public class GameFacade {
 		return this.getBoardGame().getNameHuman();
 	}
 
-	public void addShip(Ship ship, Position position) {
-		this.getBoardGame().addPion(ship, position);
+	public void addShip(Ship ship, Position position,ShipOrientationEnum orientation) {
+		this.getBoardGame().addPion(ship, position,orientation);
 	}
 }

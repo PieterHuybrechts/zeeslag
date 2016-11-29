@@ -131,7 +131,7 @@ public class PlayerPanel extends JPanel{
 			int x = Integer.parseInt(pos.substring(0, pos.indexOf(';')));
 			int y = Integer.parseInt(pos.substring(pos.indexOf(';')+1,pos.length()));
 			
-			controller.addShip(selectedShipType, new Position(x, y));
+			controller.addShip(selectedShipType, new Position(x, y),selectedOrientation);
 		}		
 	}
 }

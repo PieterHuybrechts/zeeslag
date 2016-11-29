@@ -1,6 +1,5 @@
 package ui.view;
 
-import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +17,6 @@ import javax.swing.JRadioButton;
 import domain.DomainException;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
-import javafx.scene.control.RadioButton;
 import ui.controller.Controller;
 import ui.view.panels.PlayerPanel;
 
@@ -31,7 +29,6 @@ public class View extends JFrame {
 	private PlayerPanel player2Panel;
 	private JComboBox<ShipEnum> shipTypeCB;
 	private ButtonGroup radioButtonGroup;
-	private String selectedOrientation;
 	
 	public View() {
 
@@ -74,22 +71,6 @@ public class View extends JFrame {
 
 		JLabel richtinLbl = new JLabel("Richting");
 		leftPanel.add(richtinLbl);
-
-		/*JPanel radioButtonPanel = new JPanel();
-		leftPanel.add(radioButtonPanel);
-		radioButtonPanel.setLayout(new BoxLayout(radioButtonPanel, BoxLayout.X_AXIS));
-		horzRadio = new JRadioButton("Horizontal");
-		horzRadio.addActionListener(settingsListener);
-		radioButtonPanel.add(horzRadio);
-		vertRadio = new JRadioButton("Vertical");
-		vertRadio.addActionListener(settingsListener);
-		radioButtonPanel.add(vertRadio);
-		ButtonGroup btnGroup = new ButtonGroup();
-		btnGroup.add(horzRadio);
-		leftPanel.add(radioButtonPanel);
-		btnGroup.add(vertRadio);
-		horzRadio.setSelected(true);
-		contentPanel.add(leftPanel);*/
 		
 		JPanel radioButtonPanel = new JPanel();
 		radioButtonGroup = new ButtonGroup();
@@ -105,7 +86,6 @@ public class View extends JFrame {
 			
 			if(first){
 				temp.setSelected(true);
-				selectedOrientation = temp.getText();
 				first = false;
 			}	
 		}
@@ -135,18 +115,7 @@ public class View extends JFrame {
 	
 	private class settingsChangedListener implements ActionListener {
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			/*if (horzRadio.isSelected()) {
-				player1Panel.setCurrentShipOrientation(PlayerPanel.HORZ);
-			} else if (vertRadio.isSelected()) {
-				player1Panel.setCurrentShipOrientation(PlayerPanel.VERT);
-			}*/
-			
-			try{
-				JRadioButton temp= (JRadioButton)e.getSource();
-				selectedOrientation = temp.getText();
-			}catch(Exception ex){}
-			
+		public void actionPerformed(ActionEvent e) {			
 			String text = radioButtonGroup.getSelection().getActionCommand();
 			ShipOrientationEnum o=null;
 			
