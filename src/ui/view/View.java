@@ -43,8 +43,8 @@ public class View extends JFrame{
 		
 		try{
 			controller = new Controller();	
-			String name = JOptionPane.showInputDialog("What is the name of the player?");
-			this.controller.addPlayer(name);
+			//String name = JOptionPane.showInputDialog("What is the name of the player?");
+			//this.controller.addPlayer(name);
 		}catch(DomainException e){
 			JOptionPane.showMessageDialog(null, e.getMessage(),"Warning",JOptionPane.WARNING_MESSAGE);
 			System.exit(1);
