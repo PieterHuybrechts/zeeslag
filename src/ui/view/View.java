@@ -1,5 +1,6 @@
 package ui.view;
 
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +17,8 @@ import javax.swing.JRadioButton;
 
 import domain.DomainException;
 import domain.model.ShipEnum;
+import domain.model.ShipOrientationEnum;
+import javafx.scene.control.RadioButton;
 import ui.controller.Controller;
 import ui.view.panels.PlayerPanel;
 
@@ -27,9 +30,9 @@ public class View extends JFrame {
 	private PlayerPanel player1Panel;
 	private PlayerPanel player2Panel;
 	private JComboBox<ShipEnum> shipTypeCB;
-	private JRadioButton horzRadio;
-	private JRadioButton vertRadio;
-
+	private ButtonGroup radioButtonGroup;
+	private String selectedOrientation;
+	
 	public View() {
 
 		settingsChangedListener settingsListener = new settingsChangedListener();
@@ -72,7 +75,7 @@ public class View extends JFrame {
 		JLabel richtinLbl = new JLabel("Richting");
 		leftPanel.add(richtinLbl);
 
-		JPanel radioButtonPanel = new JPanel();
+		/*JPanel radioButtonPanel = new JPanel();
 		leftPanel.add(radioButtonPanel);
 		radioButtonPanel.setLayout(new BoxLayout(radioButtonPanel, BoxLayout.X_AXIS));
 		horzRadio = new JRadioButton("Horizontal");
@@ -83,8 +86,31 @@ public class View extends JFrame {
 		radioButtonPanel.add(vertRadio);
 		ButtonGroup btnGroup = new ButtonGroup();
 		btnGroup.add(horzRadio);
+		leftPanel.add(radioButtonPanel);
 		btnGroup.add(vertRadio);
 		horzRadio.setSelected(true);
+		contentPanel.add(leftPanel);*/
+		
+		JPanel radioButtonPanel = new JPanel();
+		radioButtonGroup = new ButtonGroup();
+		radioButtonPanel.setLayout(new BoxLayout(radioButtonPanel, BoxLayout.X_AXIS));
+		boolean first = true;
+		
+		for(ShipOrientationEnum o : ShipOrientationEnum.values()){
+			JRadioButton temp = new JRadioButton(o.toString());
+			temp.setActionCommand(o.toString());
+			radioButtonGroup.add(temp);
+			temp.addActionListener(settingsListener);
+			radioButtonPanel.add(temp);
+			
+			if(first){
+				temp.setSelected(true);
+				selectedOrientation = temp.getText();
+				first = false;
+			}	
+		}
+		
+		leftPanel.add(radioButtonPanel);
 		contentPanel.add(leftPanel);
 
 		// PlayerPanels
@@ -103,19 +129,35 @@ public class View extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setMinimumSize(this.getSize());
-		settingsListener.actionPerformed(new ActionEvent(horzRadio, 0, ""));
+		settingsListener.actionPerformed(new ActionEvent(shipTypeCB, 0, ""));
 		this.setVisible(true);
 	}
 	
 	private class settingsChangedListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (horzRadio.isSelected()) {
+			/*if (horzRadio.isSelected()) {
 				player1Panel.setCurrentShipOrientation(PlayerPanel.HORZ);
 			} else if (vertRadio.isSelected()) {
 				player1Panel.setCurrentShipOrientation(PlayerPanel.VERT);
+			}*/
+			
+			try{
+				JRadioButton temp= (JRadioButton)e.getSource();
+				selectedOrientation = temp.getText();
+			}catch(Exception ex){}
+			
+			String text = radioButtonGroup.getSelection().getActionCommand();
+			ShipOrientationEnum o=null;
+			
+			for(ShipOrientationEnum temp:ShipOrientationEnum.values()){
+				if(temp.toString().equals(text)){
+					o = temp;
+					break;
+				}
 			}
-
+			
+			player1Panel.setCurrentShipOrientation(o);
 			player1Panel.setCurrentShipType((ShipEnum) shipTypeCB.getSelectedItem());
 		}
 	}

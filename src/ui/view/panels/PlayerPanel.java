@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import domain.model.ShipEnum;
+import domain.model.ShipOrientationEnum;
 import domain.model.lib.Position;
 import ui.controller.Controller;
 
@@ -23,7 +24,7 @@ public class PlayerPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = -5929386468142332772L;
 	private final Color btnBackGroundColor = new JButton().getBackground();
-	private int selectedOrientation;
+	private ShipOrientationEnum selectedOrientation;
 	private ShipEnum selectedShipType;
 	private JButton[][] buttonArray;
 	private boolean humanPlayer;
@@ -73,12 +74,8 @@ public class PlayerPanel extends JPanel{
 		add(buttonPanel);
 	}
 	
-	public void setCurrentShipOrientation(int arg0){
-		if(arg0!= HORZ && arg0!=VERT){
-			arg0=HORZ;
-		}
-		
-		selectedOrientation = arg0;
+	public void setCurrentShipOrientation(ShipOrientationEnum o){
+		selectedOrientation = o;
 	}
 	
 	public void setCurrentShipType(ShipEnum shipType){
@@ -110,10 +107,10 @@ public class PlayerPanel extends JPanel{
 				int length = selectedShipType.getLength();
 				
 				for(int i=0;i<length;i++){
-					if(selectedOrientation == HORZ){
+					if(selectedOrientation == ShipOrientationEnum.HORIZONTAL){
 						if(x+i<boardWidth)
 							buttonArray[x+i][y].setBackground(c);
-					}else if(selectedOrientation == VERT){
+					}else if(selectedOrientation == ShipOrientationEnum.VERTICAL){
 						if(y+i<boardHeight)
 							buttonArray[x][y+i].setBackground(c);
 					}
@@ -137,5 +134,4 @@ public class PlayerPanel extends JPanel{
 			controller.addShip(selectedShipType, new Position(x, y));
 		}		
 	}
-	
 }
