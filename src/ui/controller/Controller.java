@@ -7,16 +7,21 @@ import domain.model.ShipOrientationEnum;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
 import domain.service.GameFacade;
+import ui.view.View;
 
 public class Controller {
 
 	private GameFacade facade;
+	private View view;
 	
 	public Controller() throws DomainException{
 		facade = new GameFacade();
 	}
 
-	
+	public void start() {
+		view.startNameEntryView();
+		view.startGameView();
+	}
 
 	/*************************
 	 *    ADD INFORMATION    *
@@ -48,4 +53,11 @@ public class Controller {
 	public String getNameHuman() {
 		return facade.getNameHuman();
 	}
+
+
+
+	public void setView(View view) {
+		this.view = view;
+	}
+
 }

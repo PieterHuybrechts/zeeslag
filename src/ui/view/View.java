@@ -30,12 +30,15 @@ public class View extends JFrame {
 	private JComboBox<ShipEnum> shipTypeCB;
 	private ButtonGroup radioButtonGroup;
 	
-	public View() {
-		settingsChangedListener settingsListener = new settingsChangedListener();
-
+	
+	public void setController(Controller controller){
+		this.controller = controller;
+	}
+	
+	public void startNameEntryView(){
 		while (true) {
 			try {
-				controller = new Controller();
+				
 				String name = JOptionPane.showInputDialog(null, "What is your name?");
 				if (name == null)
 					System.exit(1);
@@ -44,30 +47,35 @@ public class View extends JFrame {
 			} catch (DomainException e) {
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
 			}
-		}
-
+		}		
+	}
+	
+	
+	public void startGameView(){
+		settingsChangedListener settingsListener = new settingsChangedListener();
+		
 		// ContentPane
-
+		
 		JPanel contentPanel = new JPanel();
 		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.X_AXIS));
 		this.setContentPane(contentPanel);
-
+		
 		// LeftPanel
-
+		
 		JPanel leftPanel = new JPanel();
 		leftPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
 		leftPanel.setLayout(new GridLayout(10, 0, 0, 0));
-
+		
 		JLabel beschikbareSchepenLbl = new JLabel("Beschikbare schepen");
 		leftPanel.add(beschikbareSchepenLbl);
-
+		
 		shipTypeCB = new JComboBox<ShipEnum>(ShipEnum.values());
 		shipTypeCB.addActionListener(settingsListener);
 		leftPanel.add(shipTypeCB);
-
+		
 		JPanel tussenPanel = new JPanel();
 		leftPanel.add(tussenPanel);
-
+		
 		JLabel richtinLbl = new JLabel("Richting");
 		leftPanel.add(richtinLbl);
 		
@@ -91,19 +99,19 @@ public class View extends JFrame {
 		
 		leftPanel.add(radioButtonPanel);
 		contentPanel.add(leftPanel);
-
+		
 		// PlayerPanels
-
+		
 		player1Panel = new PlayerPanel(controller,true);
 		player1Panel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 5));
 		contentPanel.add(player1Panel);
-
+		
 		player2Panel = new PlayerPanel(controller,false);
 		player2Panel.setBorder(BorderFactory.createEmptyBorder(0, 5, 10, 10));
 		contentPanel.add(player2Panel);
-
+		
 		// show frame
-
+		
 		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -71,7 +71,7 @@ public class PlayerPanel extends JPanel{
 				JButton tempButton = new JButton();
 				tempButton.setActionCommand(x+";"+y);
 				tempButton.addMouseListener(new BtnHoverListener());
-				tempButton.setPreferredSize(new Dimension(20,20));
+				tempButton.setPreferredSize(new Dimension(25,25));
 				buttonPanel.add(tempButton);
 				buttonArray[x][y] = tempButton;
 			}
