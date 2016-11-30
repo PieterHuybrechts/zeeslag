@@ -1,6 +1,7 @@
 package domain.service;
 
 import domain.DomainException;
+import domain.model.Board;
 import domain.model.Computer;
 import domain.model.Human;
 import domain.model.Player;
@@ -44,5 +45,10 @@ public class BSGame implements BoardGame{
 		//TODO addShip in human
 		this.human.addShip((Ship) pion, position, orientation);
 		
+	}
+
+	@Override
+	public Board getBoard() {
+		return human.getBoard();
 	}
 }

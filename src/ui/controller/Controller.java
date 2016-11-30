@@ -1,6 +1,7 @@
 package ui.controller;
 
 import domain.DomainException;
+import domain.model.Board;
 import domain.model.Ship;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
@@ -54,7 +55,9 @@ public class Controller {
 		return facade.getNameHuman();
 	}
 
-
+	public Board getBoard(){
+		return facade.getBoard();
+	}
 
 	public void setView(View view) {
 		this.view = view;

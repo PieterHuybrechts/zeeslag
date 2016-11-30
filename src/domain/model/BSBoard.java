@@ -29,10 +29,12 @@ public class BSBoard implements Board{
 		for(int i=0;i<ship.getLength();i++){
 			switch(orientation){
 			case VERTICAL:
-				getField()[pos.getX()][pos.getY()+i] = true;
+				if(pos.getY()+i<getSize().getWidth())
+					getField()[pos.getX()][pos.getY()+i] = true;
 				break;
 			case HORIZONTAL:
-				getField()[pos.getX()+i][pos.getY()] = true;
+				if(pos.getX()+i<getSize().getHeight())
+					getField()[pos.getX()+i][pos.getY()] = true;
 				break;
 			}
 		}

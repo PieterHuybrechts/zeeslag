@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import domain.DomainException;
+import domain.model.BSBoard;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
 import domain.model.lib.Position;
@@ -70,7 +71,7 @@ public class PlayerPanel extends JPanel{
 				//x=column
 				JButton tempButton = new JButton();
 				tempButton.setActionCommand(x+";"+y);
-				tempButton.addMouseListener(new BtnHoverListener());
+				tempButton.addMouseListener(new BtnListener());					
 				tempButton.setPreferredSize(new Dimension(25,25));
 				buttonPanel.add(tempButton);
 				buttonArray[x][y] = tempButton;
@@ -88,11 +89,11 @@ public class PlayerPanel extends JPanel{
 		selectedShipType = shipType;
 	}
 	
-	public boolean isPlayerBoard() {
+	public boolean isHumanBoard() {
 		return humanPlayer;
 	}
 	
-	private class BtnHoverListener implements MouseListener{
+	private class BtnListener implements MouseListener{
 		@Override
 		public void mouseEntered(MouseEvent e) {			
 			changeColor(e,new Color(255,255,255));
@@ -104,7 +105,7 @@ public class PlayerPanel extends JPanel{
 		}
 		
 		private void changeColor(MouseEvent e,Color c){
-			if(isPlayerBoard()){	
+			if(isHumanBoard()){	
 				JButton btn = (JButton)e.getSource();
 				btn.setBackground(new Color(255,255,255));
 				String pos = btn.getActionCommand();
@@ -121,7 +122,18 @@ public class PlayerPanel extends JPanel{
 							buttonArray[x][y+i].setBackground(c);
 					}
 				}
-			}
+				
+				BSBoard board = (BSBoard) controller.getBoard();
+				boolean[][] field = board.getField();
+				
+				for(int i=0;i<field.length;i++){
+					for (int j=0;j<field[0].length;j++){
+						if(field[i][j]){
+							buttonArray[i][j].setBackground(new Color(100,100,100));;
+						}
+					}
+				}
+			}			
 		}
 
 		@Override
@@ -137,11 +149,26 @@ public class PlayerPanel extends JPanel{
 			int x = Integer.parseInt(pos.substring(0, pos.indexOf(';')));
 			int y = Integer.parseInt(pos.substring(pos.indexOf(';')+1,pos.length()));
 			
-			try {
-				controller.addShip(selectedShipType, new Position(x, y),selectedOrientation);
-			} catch (DomainException e1) {
-				JOptionPane.showMessageDialog(null, e1.getMessage(),"Warning",JOptionPane.WARNING_MESSAGE);
+			
+			if(isHumanBoard()){
+				try {
+					controller.addShip(selectedShipType, new Position(x, y),selectedOrientation);
+				} catch (DomainException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage(),"Warning",JOptionPane.WARNING_MESSAGE);
+				}
+				
+				BSBoard board = (BSBoard) controller.getBoard();
+				boolean[][] field = board.getField();
+				
+				for(int i=0;i<field.length;i++){
+					for (int j=0;j<field[0].length;j++){
+						if(field[i][j]){
+							buttonArray[i][j].setBackground(new Color(100,100,100));;
+						}
+					}
+				}				
 			}
+			
 		}		
 	}
 }
