@@ -27,7 +27,7 @@ public class Controller {
 		this.facade.addPlayer(name);
 	}
 
-	public void addShip(ShipEnum type, Position position, ShipOrientationEnum orientation) {
+	public void addShip(ShipEnum type, Position position, ShipOrientationEnum orientation) throws DomainException {
 		this.facade.addShip(new Ship(type), position, orientation);
 	}
 	

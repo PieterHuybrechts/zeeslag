@@ -5,11 +5,11 @@ import domain.model.lib.Position;
 
 public class BSBoard implements Board{
 	
-	private int[][] field;
+	private boolean[][] field;
 	private BoardDimension dimension;
 	
 	public BSBoard(){
-		setField(new int[10][10]);
+		setField(new boolean[10][10]);
 		dimension = new BoardDimension(10, 10);
 	}
 
@@ -18,15 +18,23 @@ public class BSBoard implements Board{
 		return dimension;
 	}
 
-	public int[][] getField() {
+	public boolean[][] getField() {
 		return field;
 	}
 
-	private void setField(int[][] field) {
+	private void setField(boolean[][] field) {
 		this.field = field;
 	}
-	public void addShip(Ship ship, Position position, ShipOrientationEnum orientation){
-		//TODO must be implmented
-		
+	public void addShip(Ship ship, Position pos, ShipOrientationEnum orientation){
+		for(int i=0;i<ship.getLength();i++){
+			switch(orientation){
+			case VERTICAL:
+				getField()[pos.getX()][pos.getY()+i] = true;
+				break;
+			case HORIZONTAL:
+				getField()[pos.getX()+i][pos.getY()] = true;
+				break;
+			}
+		}
 	}
 }

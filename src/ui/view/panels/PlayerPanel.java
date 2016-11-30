@@ -3,8 +3,10 @@ package ui.view.panels;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import domain.DomainException;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
 import domain.model.lib.Position;
@@ -43,10 +45,12 @@ public class PlayerPanel extends JPanel{
 		buttonArray = new JButton[10][10];		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		JPanel contentPanel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) contentPanel.getLayout();
+		//Name label
+		
+		JPanel nameLblPnl = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) nameLblPnl.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
-		add(contentPanel);
+		add(nameLblPnl);
 		
 		String name;
 		if(humanPlayer)
@@ -55,7 +59,9 @@ public class PlayerPanel extends JPanel{
 			name = c.getNameComputer();
 		
 		JLabel nameLbl = new JLabel(name);
-		contentPanel.add(nameLbl);
+		nameLblPnl.add(nameLbl);
+		
+		//ButtonPanel
 		
 		JPanel buttonPanel = new JPanel(new GridLayout(boardHeight,boardWidth));
 		for(int y=0;y<boardHeight;y++){
@@ -131,7 +137,11 @@ public class PlayerPanel extends JPanel{
 			int x = Integer.parseInt(pos.substring(0, pos.indexOf(';')));
 			int y = Integer.parseInt(pos.substring(pos.indexOf(';')+1,pos.length()));
 			
-			controller.addShip(selectedShipType, new Position(x, y),selectedOrientation);
+			try {
+				controller.addShip(selectedShipType, new Position(x, y),selectedOrientation);
+			} catch (DomainException e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage(),"Warning",JOptionPane.WARNING_MESSAGE);
+			}
 		}		
 	}
 }
