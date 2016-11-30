@@ -3,7 +3,7 @@ package domain.model;
 public enum ShipOrientationEnum {
 
 	HORIZONTAL("Horizontaal"),
-	VERTICAL("Verticaal");
+	VERTICAL("Vertikaal");
 	
 	private String description;
 	
