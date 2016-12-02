@@ -48,7 +48,7 @@ public class BSBoard implements Board{
 		}
 	}
 	
-	private boolean isValidMove(Ship ship){
+	public boolean isValidMove(Ship ship){
 		if(this.schepen.size()== 5){
 			return false;
 		}
