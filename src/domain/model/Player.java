@@ -37,5 +37,5 @@ public abstract class Player {
 		
 		this.board = board;
 	}
-	public abstract void addShip(Ship ship, Position position, ShipOrientationEnum orientation);
+	public abstract void addShip(Ship ship, Position position, ShipOrientationEnum orientation) throws DomainException, Exception;
 }

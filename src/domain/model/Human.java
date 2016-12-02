@@ -10,8 +10,9 @@ public class Human extends Player{
 	}
 
 	@Override
-	public void addShip(Ship ship, Position position, ShipOrientationEnum orientation) {
-		// TODO addShip op zijn board
+	public void addShip(Ship ship, Position position, ShipOrientationEnum orientation) throws Exception {
+		// TODO addShip op zijn boardip
+		
 		this.getBSBoard().addShip(ship, position, orientation);
 	}
 }
