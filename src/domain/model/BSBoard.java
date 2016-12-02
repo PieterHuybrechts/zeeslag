@@ -65,8 +65,8 @@ public class BSBoard implements Board{
 				return false;
 			}
 		}
-		return true && this.checkOverlap(ship);
-	};
+		return true && this.checkOverlap(ship) && this.checkTouch(ship);
+	}
 	private boolean checkOverlap(Ship ship){
 		Position pos = ship.getPos();
 		ShipOrientationEnum orientation = ship.getOrientation();
@@ -82,6 +82,52 @@ public class BSBoard implements Board{
 			break;
 		}
 	}
+	
 	return true;
 }
+	private boolean checkTouch(Ship ship){
+		List<Position> newShipPos = new ArrayList<Position>();
+		Position pos = ship.getPos();
+		ShipOrientationEnum orientation = ship.getOrientation();
+		for(int i=0; i<ship.getLength();i++){
+			switch(orientation){
+			case VERTICAL:
+				if(pos.getY()+i<getSize().getWidth()){
+					Position p = new Position(pos.getX(),pos.getY()+i);
+				
+					newShipPos.add(p);}
+				break;
+			case HORIZONTAL:
+				if(pos.getX()+i<getSize().getHeight()){
+					Position p = new Position(pos.getX()+i,pos.getY());
+			
+					newShipPos.add(p);}
+				break;
+			}
+		}
+		for(Ship s: this.schepen){
+			Position p = s.getPos();
+			Position up = new Position(p.getX(),p.getY()-1);
+			Position down =new Position(p.getX(), p.getY()+1);
+			Position left =new Position(p.getX()-1, p.getY());
+			Position right =new Position(p.getX()+1, p.getY());
+			Position leftup = new Position(p.getX()-1, p.getY()-1);
+			Position leftdown= new Position(p.getX()-1, p.getY()+1);
+			Position rightup= new Position(p.getX()+1,p.getY()-1);
+			Position rightdown= new Position(p.getX()+1, p.getY()+1);
+			
+	if(newShipPos.contains(up)|| newShipPos.contains(down)|| newShipPos.contains(left)|| newShipPos.contains(right)||newShipPos.contains(leftdown)|| newShipPos.contains(leftup)|| newShipPos.contains(rightdown)|| newShipPos.contains(rightup)){
+	 return false;	
+	}
+				
+		}
+		return true;
+		
+	}
+
+	@Override
+	public int getMaxAmountOfPieces() {
+		// TODO Auto-generated method stub
+		return 5;
+	}
 }
