@@ -94,13 +94,13 @@ public class BSBoard implements Board{
 			case VERTICAL:
 				if(pos.getY()+i<getSize().getWidth()){
 					Position p = new Position(pos.getX(),pos.getY()+i);
-				
+				System.out.println(p);
 					newShipPos.add(p);}
 				break;
 			case HORIZONTAL:
 				if(pos.getX()+i<getSize().getHeight()){
 					Position p = new Position(pos.getX()+i,pos.getY());
-			
+			System.out.println(p);
 					newShipPos.add(p);}
 				break;
 			}
@@ -108,8 +108,9 @@ public class BSBoard implements Board{
 		for(Ship s: this.schepen){
 			switch(s.getOrientation()){
 			case VERTICAL:
-				for(int i=0;i< ship.getLength();i++){
+				for(int i=0;i<= s.getLength();i++){
 					Position p = new Position(s.getPos().getX(),s.getPos().getY()+i);
+	
 					Position up = new Position(p.getX(),p.getY()-1);
 					Position down =new Position(p.getX(), p.getY()+1);
 					Position left =new Position(p.getX()-1, p.getY());
@@ -118,22 +119,32 @@ public class BSBoard implements Board{
 					Position leftdown= new Position(p.getX()-1, p.getY()+1);
 					Position rightup= new Position(p.getX()+1,p.getY()-1);
 					Position rightdown= new Position(p.getX()+1, p.getY()+1);
+					
 					if(newShipPos.contains(up)|| newShipPos.contains(down)|| newShipPos.contains(left)|| newShipPos.contains(right)||newShipPos.contains(leftdown)|| newShipPos.contains(leftup)|| newShipPos.contains(rightdown)|| newShipPos.contains(rightup)){
 						 return false;	
 						}
 				}
 				break;
 			case HORIZONTAL:
-				for(int i=0;i< ship.getLength();i++){
+				for(int i=0;i<= s.getLength();i++){
 					Position p = new Position(s.getPos().getX()+i,s.getPos().getY());
+					System.out.println(p);
 					Position up = new Position(p.getX(),p.getY()-1);
+					System.out.println(up);
 					Position down =new Position(p.getX(), p.getY()+1);
+					System.out.println(down);
 					Position left =new Position(p.getX()-1, p.getY());
+					System.out.println(left);
 					Position right =new Position(p.getX()+1, p.getY());
+					System.out.println(right);
 					Position leftup = new Position(p.getX()-1, p.getY()-1);
+					System.out.println(leftup);
 					Position leftdown= new Position(p.getX()-1, p.getY()+1);
+					System.out.println(leftdown);
 					Position rightup= new Position(p.getX()+1,p.getY()-1);
+					System.out.println(rightup);
 					Position rightdown= new Position(p.getX()+1, p.getY()+1);
+					System.out.println(rightdown);
 					if(newShipPos.contains(up)|| newShipPos.contains(down)|| newShipPos.contains(left)|| newShipPos.contains(right)||newShipPos.contains(leftdown)|| newShipPos.contains(leftup)|| newShipPos.contains(rightdown)|| newShipPos.contains(rightup)){
 						 return false;	
 						}
