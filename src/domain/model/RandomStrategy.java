@@ -9,12 +9,6 @@ public class RandomStrategy implements PlaceShipStrategy{
 
 	@Override
 	public Ship createShip(Board board) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/*@Override
-	public Ship createShip(Board board) {
 		Ship ship = null;
 		
 		while(true){
@@ -32,10 +26,14 @@ public class RandomStrategy implements PlaceShipStrategy{
 				ship = new Ship(type, pos, or);
 			} catch (DomainException e) {}
 
-			//if(board.)
+			if(board.isValidMove(ship)){
+				break;
+			}
 			
-		}*/
+		}
 		
 		
+		return ship;
+	}
 
 }
