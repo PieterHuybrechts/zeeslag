@@ -31,7 +31,7 @@ public class View extends JFrame {
 	private ButtonGroup radioButtonGroup;
 	
 	
-	public void setController(Controller controller){
+	public View(Controller controller) {
 		this.controller = controller;
 	}
 	

@@ -16,6 +16,7 @@ public class Controller {
 	private View view;
 	
 	public Controller() throws DomainException{
+		this.view = new View(this);
 		facade = new GameFacade();
 	}
 
@@ -57,10 +58,6 @@ public class Controller {
 
 	public Board getBoard(){
 		return facade.getBoard();
-	}
-
-	public void setView(View view) {
-		this.view = view;
 	}
 
 }
