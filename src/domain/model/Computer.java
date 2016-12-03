@@ -19,11 +19,4 @@ public class Computer extends Player{
 			addShip(ship);
 		}
 	}
-
-	@Override
-	public void addShip(Ship ship) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }

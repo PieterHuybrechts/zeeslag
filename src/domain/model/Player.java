@@ -29,6 +29,7 @@ public abstract class Player {
 	public BSBoard getBSBoard(){
 		return (BSBoard) this.board;
 	}
+	
 	protected void setBoard(Board board) throws DomainException{
 		if(board==null){
 			throw new DomainException();
@@ -36,5 +37,8 @@ public abstract class Player {
 		
 		this.board = board;
 	}
-	public abstract void addShip(Ship ship) throws DomainException, Exception;
+	
+	public void addShip(Ship ship){
+		this.getBSBoard().addShip(ship);
+	}
 }
