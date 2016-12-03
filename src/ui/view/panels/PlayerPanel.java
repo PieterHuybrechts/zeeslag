@@ -27,23 +27,24 @@ public class PlayerPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = -5929386468142332772L;
 	private final Color btnBackGroundColor = new JButton().getBackground();
-	private ShipOrientationEnum selectedOrientation;
-	private ShipEnum selectedShipType;
-	private JButton[][] buttonArray;
+	
+	private Controller controller;
 	private boolean humanPlayer;
 	private int boardWidth;
 	private int boardHeight;
-	private Controller controller;
-	
-	public static final int HORZ = 0;
-	public static final int VERT = 1;
+	private JButton[][] buttonMatrix;
+	private Color[][] colorMatrix;
+	private ShipOrientationEnum selectedOrientation;
+	private ShipEnum selectedShipType;
 	
 	public PlayerPanel(Controller c,boolean humanPlayer){
 		controller = c;
+		this.humanPlayer = humanPlayer;
 		boardWidth = c.getBoardSize().getWidth();
 		boardHeight = c.getBoardSize().getHeight();
-		this.humanPlayer = humanPlayer;
-		buttonArray = new JButton[10][10];		
+		buttonMatrix = new JButton[boardWidth][boardHeight];
+		colorMatrix = new Color[boardWidth][boardHeight];
+		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		//Name label
@@ -74,7 +75,7 @@ public class PlayerPanel extends JPanel{
 				tempButton.addMouseListener(new BtnListener());					
 				tempButton.setPreferredSize(new Dimension(25,25));
 				buttonPanel.add(tempButton);
-				buttonArray[x][y] = tempButton;
+				buttonMatrix[x][y] = tempButton;
 			}
 		}
 		
@@ -95,8 +96,20 @@ public class PlayerPanel extends JPanel{
 	
 	private class BtnListener implements MouseListener{
 		@Override
-		public void mouseEntered(MouseEvent e) {			
-			changeColor(e,new Color(255,255,255));
+		public void mouseEntered(MouseEvent e) {
+			
+			JButton btn = (JButton)e.getSource();
+			String pos = btn.getActionCommand();
+			int x = Integer.parseInt(pos.substring(0, pos.indexOf(';')));				
+			int y = Integer.parseInt(pos.substring(pos.indexOf(';')+1,pos.length()));
+			Position p = new Position(x, y);
+						
+			if(isHumanBoard() && controller.isValidMove(selectedShipType,selectedOrientation,p))
+				changeColor(e,new Color(255,255,255));
+			else if(isHumanBoard()){
+				changeColor(e,new Color(255,75,75));
+			}
+				
 		}
 
 		@Override
@@ -116,10 +129,10 @@ public class PlayerPanel extends JPanel{
 				for(int i=0;i<length;i++){
 					if(selectedOrientation == ShipOrientationEnum.HORIZONTAL){
 						if(x+i<boardWidth)
-							buttonArray[x+i][y].setBackground(c);
+							buttonMatrix[x+i][y].setBackground(c);
 					}else if(selectedOrientation == ShipOrientationEnum.VERTICAL){
 						if(y+i<boardHeight)
-							buttonArray[x][y+i].setBackground(c);
+							buttonMatrix[x][y+i].setBackground(c);
 					}
 				}
 				
@@ -129,7 +142,7 @@ public class PlayerPanel extends JPanel{
 				for(int i=0;i<field.length;i++){
 					for (int j=0;j<field[0].length;j++){
 						if(field[i][j]){
-							buttonArray[i][j].setBackground(new Color(100,100,100));;
+							buttonMatrix[i][j].setBackground(new Color(100,100,100));;
 						}
 					}
 				}
@@ -164,12 +177,17 @@ public class PlayerPanel extends JPanel{
 				for(int i=0;i<field.length;i++){
 					for (int j=0;j<field[0].length;j++){
 						if(field[i][j]){
-							buttonArray[i][j].setBackground(new Color(100,100,100));;
+							buttonMatrix[i][j].setBackground(new Color(100,100,100));;
 						}
 					}
 				}				
 			}
 			
 		}		
+	}
+
+	public void update() {
+		
+		
 	}
 }

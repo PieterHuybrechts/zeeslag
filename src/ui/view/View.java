@@ -14,13 +14,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import common.Observer;
 import domain.DomainException;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
 import ui.controller.Controller;
 import ui.view.panels.PlayerPanel;
 
-public class View extends JFrame {
+public class View extends JFrame implements Observer{
 
 	private static final long serialVersionUID = -7999885517041228366L;
 
@@ -38,7 +39,6 @@ public class View extends JFrame {
 	public void startNameEntryView(){
 		while (true) {
 			try {
-				
 				String name = JOptionPane.showInputDialog(null, "What is your name?");
 				if (name == null)
 					System.exit(1);
@@ -136,5 +136,11 @@ public class View extends JFrame {
 			player1Panel.setCurrentShipOrientation(o);
 			player1Panel.setCurrentShipType((ShipEnum) shipTypeCB.getSelectedItem());
 		}
+	}
+
+	@Override
+	public void update() {
+		player1Panel.update();
+		player2Panel.update();
 	}
 }
