@@ -2,7 +2,6 @@ package ui.controller;
 
 import domain.DomainException;
 import domain.model.Board;
-import domain.model.Ship;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
 import domain.model.lib.BoardDimension;
@@ -18,6 +17,7 @@ public class Controller {
 	public Controller() throws DomainException{
 		this.view = new View(this);
 		facade = new GameFacade();
+		facade.addObserver(view);
 	}
 
 	public void start() {
@@ -59,6 +59,10 @@ public class Controller {
 
 	public Board getBoard(){
 		return facade.getBoard();
+	}
+
+	public boolean isValidMove(ShipEnum type, ShipOrientationEnum orientation, Position pos) {
+		return facade.isValidMove(type,orientation,pos);
 	}
 
 }

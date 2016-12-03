@@ -3,6 +3,7 @@ package domain.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import domain.DomainException;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
 
@@ -52,6 +53,17 @@ public class BSBoard implements Board{
 		}
 	}
 	
+	@Override
+	public boolean isValidMove(ShipEnum type, ShipOrientationEnum orientation, Position pos) {
+		boolean valid = false;
+		
+		try {
+			valid = isValidMove(new Ship(type, pos, orientation));
+		} catch (DomainException e) {}
+		
+		return valid;
+	}
+	
 	public boolean isValidMove(Ship ship){
 		if(this.schepen.size()== 5){
 			return false;
@@ -71,6 +83,7 @@ public class BSBoard implements Board{
 		}
 		return true && this.checkOverlap(ship) && this.checkTouch(ship) && this.checkAmount(ship);
 	}
+
 	private boolean checkOverlap(Ship ship){
 		Position pos = ship.getPos();
 		ShipOrientationEnum orientation = ship.getOrientation();
@@ -202,4 +215,5 @@ public class BSBoard implements Board{
 		// TODO Auto-generated method stub
 		return 5;
 	}
+
 }

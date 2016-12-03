@@ -1,5 +1,6 @@
 package domain.service;
 
+import common.Observer;
 import domain.DomainException;
 import domain.model.Board;
 import domain.model.Ship;
@@ -52,4 +53,15 @@ public class GameFacade {
 	public Board getBoard(){
 		return game.getBoard();
 	}
+	
+	public void addObserver(Observer o){
+		game.addObserver(o);
+	}
+
+	public boolean isValidMove(ShipEnum type, ShipOrientationEnum orientation, Position pos) {
+		BSGame g = (BSGame) game;
+		
+		return g.isValidMove(type,orientation,pos);
+	}
+	
 }
