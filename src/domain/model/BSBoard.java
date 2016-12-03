@@ -3,6 +3,8 @@ package domain.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
+
 import domain.DomainException;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
@@ -12,7 +14,11 @@ public class BSBoard implements Board{
 	private boolean[][] field;
 	private BoardDimension dimension;
 	private List<Ship> schepen = new ArrayList<Ship>();
-	
+	private static final int  MAX_AANTAL_VLIEGDEKSCHIP=1;
+	private static final int  MAX_AANTAL_SLAGSCHIP=2;
+	private static final int  MAX_AANTAL_ONDERZEEËR=3;
+	private static final int  MAX_AANTAL_TORPEDOBOOTJAGER=3;
+	private static final int  MAX_AANTAL_PATROUILLESCHIP=4;
 	public BSBoard(){
 		setField(new boolean[10][10]);
 		dimension = new BoardDimension(10, 10);
@@ -65,7 +71,7 @@ public class BSBoard implements Board{
 				return false;
 			}
 		}
-		return true && this.checkOverlap(ship) && this.checkTouch(ship);
+		return true && this.checkOverlap(ship) && this.checkTouch(ship) && this.checkAmount(ship);
 	}
 	private boolean checkOverlap(Ship ship){
 		Position pos = ship.getPos();
@@ -108,7 +114,7 @@ public class BSBoard implements Board{
 		for(Ship s: this.schepen){
 			switch(s.getOrientation()){
 			case VERTICAL:
-				for(int i=0;i<= s.getLength();i++){
+				for(int i=0;i< s.getLength();i++){
 					Position p = new Position(s.getPos().getX(),s.getPos().getY()+i);
 	
 					Position up = new Position(p.getX(),p.getY()-1);
@@ -126,7 +132,7 @@ public class BSBoard implements Board{
 				}
 				break;
 			case HORIZONTAL:
-				for(int i=0;i<= s.getLength();i++){
+				for(int i=0;i< s.getLength();i++){
 					Position p = new Position(s.getPos().getX()+i,s.getPos().getY());
 					System.out.println(p);
 					Position up = new Position(p.getX(),p.getY()-1);
@@ -156,6 +162,39 @@ public class BSBoard implements Board{
 
 				
 	
+		return true;
+		
+	}
+	private boolean checkAmount(Ship ship){
+		int count = 0;
+		for(Ship s : this.schepen){
+			
+			if(ship.getName().equals(s.getName())){
+				count++;
+			}
+		}
+		String name = ship.getName();
+		if(name.equals(ShipEnum.VLIEGDEKSCHIP.getName())){
+			if(count == MAX_AANTAL_VLIEGDEKSCHIP){
+				return false;
+			}
+		}else if(name.equals(ShipEnum.SLAGSCHIP.getName())){
+			if(count == MAX_AANTAL_SLAGSCHIP){
+				return false;
+			}
+		} else if(name.equals(ShipEnum.ONDERZEEER.getName())){
+			if(count == MAX_AANTAL_ONDERZEEËR){
+				return false;
+			}
+		}else if(name.equals(ShipEnum.TORPEDOBOOTJAGER.getName())){
+			if(count == MAX_AANTAL_TORPEDOBOOTJAGER){
+				return false;
+			}
+		} else {
+			if(count == MAX_AANTAL_PATROUILLESCHIP){
+				return false;
+			}
+		}
 		return true;
 		
 	}
