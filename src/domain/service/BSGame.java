@@ -41,11 +41,11 @@ public class BSGame implements BoardGame{
 	}
 
 	@Override
-	public void addPion(Object pion, Position position, ShipOrientationEnum orientation) {
+	public void addPion(Ship ship) {
 		//TODO addShip in human
 	
 		try {
-			this.human.addShip((Ship) pion, position, orientation);
+			this.human.addShip(ship);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

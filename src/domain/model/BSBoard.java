@@ -3,9 +3,6 @@ package domain.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
-
-import domain.DomainException;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
 
@@ -36,21 +33,22 @@ public class BSBoard implements Board{
 	private void setField(boolean[][] field) {
 		this.field = field;
 	}
-	public void addShip(Ship ship, Position pos, ShipOrientationEnum orientation){
+
+	public void addShip(Ship ship){
 		if(this.isValidMove(ship)){
-		this.schepen.add(ship);
-		for(int i=0;i<ship.getLength();i++){
-			switch(orientation){
-			case VERTICAL:
-				if(pos.getY()+i<getSize().getWidth())
-					getField()[pos.getX()][pos.getY()+i] = true;
-				break;
-			case HORIZONTAL:
-				if(pos.getX()+i<getSize().getHeight())
-					getField()[pos.getX()+i][pos.getY()] = true;
-				break;
+			this.schepen.add(ship);
+			for(int i=0;i<ship.getLength();i++){
+				switch(ship.getOrientation()){
+				case VERTICAL:
+					if(ship.getPos().getY()+i<getSize().getWidth())
+						getField()[ship.getPos().getX()][ship.getPos().getY()+i] = true;
+					break;
+				case HORIZONTAL:
+					if(ship.getPos().getX()+i<getSize().getHeight())
+						getField()[ship.getPos().getX()+i][ship.getPos().getY()] = true;
+					break;
+				}
 			}
-		}
 		}
 	}
 	

@@ -3,6 +3,7 @@ package domain.service;
 import domain.DomainException;
 import domain.model.Board;
 import domain.model.Ship;
+import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
@@ -40,8 +41,12 @@ public class GameFacade {
 		return this.getBoardGame().getNameHuman();
 	}
 	
-	public void addShip(Ship ship, Position position,ShipOrientationEnum orientation) {
-		this.getBoardGame().addPion(ship, position,orientation);
+	public void addShip(ShipEnum ship, Position position,ShipOrientationEnum orientation) {
+		try {
+			this.getBoardGame().addPion(new Ship(ship,position,orientation));
+		} catch (DomainException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public Board getBoard(){

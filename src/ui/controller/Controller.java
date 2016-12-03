@@ -36,7 +36,7 @@ public class Controller {
 
 	public void addShip(ShipEnum type, Position position, ShipOrientationEnum orientation) throws DomainException {
 	
-		this.facade.addShip(new Ship(type,position, orientation), position, orientation);
+		this.facade.addShip(type, position, orientation);
 	}
 	
 

@@ -2,7 +2,6 @@ package domain.model;
 
 import domain.DomainException;
 import domain.PlaceShipFactory;
-import domain.model.lib.Position;
 
 public class Computer extends Player{
 
@@ -11,14 +10,18 @@ public class Computer extends Player{
 	public Computer(String name) throws DomainException{
 		super(name,new BSBoard());
 		strat = new PlaceShipFactory().getPlaceShipStrategy();
+		createShips();
 	}
 	
 	private void createShips(){
-		
+		for(int i=0;i<5;i++){
+			Ship ship= strat.createShip(getBoard());
+			addShip(ship);
+		}
 	}
 
 	@Override
-	public void addShip(Ship ship, Position position, ShipOrientationEnum orientation) {
+	public void addShip(Ship ship) {
 		// TODO Auto-generated method stub
 		
 	}
