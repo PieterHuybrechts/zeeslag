@@ -52,6 +52,10 @@ public class PlayerPanel extends JPanel{
 		}else{
 			board = c.getComputerBoard();
 			name = c.getNameComputer();
+			
+			
+			
+			
 		}
 		
 		boardWidth = board.getSize().getWidth();
@@ -59,7 +63,6 @@ public class PlayerPanel extends JPanel{
 		
 		
 		buttonMatrix = new JButton[boardWidth][boardHeight];
-		
 		
 		//Name label
 		
@@ -106,7 +109,22 @@ public class PlayerPanel extends JPanel{
 			board = controller.GetHumanBoard();
 		}else{
 			board = controller.getComputerBoard();
+			
+			for(Ship s : board.getShips()){
+				int xPos = s.getPos().getX();
+				int yPos = s.getPos().getY();
+				
+				for(int i = 0;i<s.getLength();i++){
+					if(s.getOrientation() == ShipOrientationEnum.VERTICAL){
+						buttonMatrix[xPos][yPos+i].setBackground(new Color(100,100,100));
+					}else if(s.getOrientation() == ShipOrientationEnum.HORIZONTAL){
+						buttonMatrix[xPos+i][yPos].setBackground(new Color(100,100,100));
+					}
+				}	
+			}
 		}
+		
+				
 		
 	}
 	
@@ -172,19 +190,21 @@ public class PlayerPanel extends JPanel{
 					}
 				}
 								
-				for(Ship s : board.getShips()){
-					int xPos = s.getPos().getX();
-					int yPos = s.getPos().getY();
-					
-					for(int i = 0;i<s.getLength();i++){
-						if(s.getOrientation() == ShipOrientationEnum.VERTICAL){
-							buttonMatrix[xPos][yPos+i].setBackground(new Color(100,100,100));
-						}else if(s.getOrientation() == ShipOrientationEnum.HORIZONTAL){
-							buttonMatrix[xPos+i][yPos].setBackground(new Color(100,100,100));
-						}
-					}	
-				}		
+				
 			}
+			
+			for(Ship s : board.getShips()){
+				int xPos = s.getPos().getX();
+				int yPos = s.getPos().getY();
+				
+				for(int i = 0;i<s.getLength();i++){
+					if(s.getOrientation() == ShipOrientationEnum.VERTICAL){
+						buttonMatrix[xPos][yPos+i].setBackground(new Color(100,100,100));
+					}else if(s.getOrientation() == ShipOrientationEnum.HORIZONTAL){
+						buttonMatrix[xPos+i][yPos].setBackground(new Color(100,100,100));
+					}
+				}	
+			}		
 		}
 		
 		@Override

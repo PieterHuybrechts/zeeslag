@@ -118,6 +118,8 @@ public class View extends JFrame implements Observer{
 		this.setMinimumSize(this.getSize());
 		settingsListener.actionPerformed(new ActionEvent(shipTypeCB, 0, ""));
 		this.setVisible(true);
+		
+		update();
 	}
 	
 	private class settingsChangedListener implements ActionListener {
