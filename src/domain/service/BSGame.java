@@ -52,12 +52,12 @@ public class BSGame implements BoardGame{
 	
 		try {
 			this.human.addShip(ship);
+			notifyObservers();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		notifyObservers();
 		
 	}
 

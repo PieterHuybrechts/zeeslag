@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import domain.DomainException;
 import domain.model.BSBoard;
+import domain.model.Ship;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
 import domain.model.lib.Position;
@@ -30,36 +31,41 @@ public class PlayerPanel extends JPanel{
 	
 	private Controller controller;
 	private boolean humanPlayer;
-	private int boardWidth;
-	private int boardHeight;
+	private BSBoard board;
 	private JButton[][] buttonMatrix;
-	private Color[][] colorMatrix;
 	private ShipOrientationEnum selectedOrientation;
 	private ShipEnum selectedShipType;
 	
 	public PlayerPanel(Controller c,boolean humanPlayer){
 		controller = c;
 		this.humanPlayer = humanPlayer;
-		boardWidth = c.getBoardSize().getWidth();
-		boardHeight = c.getBoardSize().getHeight();
-		buttonMatrix = new JButton[boardWidth][boardHeight];
-		colorMatrix = new Color[boardWidth][boardHeight];
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+		String name;
+		int boardWidth;
+		int boardHeight;
+		
+		if(humanPlayer){
+			board = c.GetHumanBoard();
+			name = c.getNameHuman();
+		}else{
+			board = c.getComputerBoard();
+			name = c.getNameComputer();
+		}
+		
+		boardWidth = board.getSize().getWidth();
+		boardHeight = board.getSize().getHeight();
+		
+		buttonMatrix = new JButton[boardWidth][boardHeight];
+		
 		
 		//Name label
 		
 		JPanel nameLblPnl = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) nameLblPnl.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
-		add(nameLblPnl);
-		
-		String name;
-		if(humanPlayer)
-			name = c.getNameHuman();
-		else
-			name = c.getNameComputer();
-		
+		add(nameLblPnl);		
 		JLabel nameLbl = new JLabel(name);
 		nameLblPnl.add(nameLbl);
 		
@@ -93,105 +99,98 @@ public class PlayerPanel extends JPanel{
 	public boolean isHumanBoard() {
 		return humanPlayer;
 	}
+
+	public void update() {		
+		if(isHumanBoard()){
+			board = controller.GetHumanBoard();
+		}else{
+			board = controller.getComputerBoard();
+		}
+		
+	}
 	
 	private class BtnListener implements MouseListener{
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			
-			JButton btn = (JButton)e.getSource();
-			String pos = btn.getActionCommand();
-			int x = Integer.parseInt(pos.substring(0, pos.indexOf(';')));				
-			int y = Integer.parseInt(pos.substring(pos.indexOf(';')+1,pos.length()));
-			Position p = new Position(x, y);
-						
-			if(isHumanBoard() && controller.isValidMove(selectedShipType,selectedOrientation,p))
-				changeColor(e,new Color(255,255,255));
-			else if(isHumanBoard()){
-				changeColor(e,new Color(255,75,75));
+			if(isHumanBoard()){
+				if(board.isValidMove(selectedShipType,selectedOrientation,getPos(e))){
+					changeColor(e,new Color(255,255,255));
+				}else{
+					changeColor(e,new Color(255,75,75));
+				}
 			}
-				
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			changeColor(e,btnBackGroundColor);
+			if(isHumanBoard())
+				changeColor(e,btnBackGroundColor);
 		}
 		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			Position p = getPos(e);
+			
+			if(isHumanBoard()){
+				try {
+					System.out.println("x: " + p.getX() + "   y:  " +p.getY());
+					controller.addShip(selectedShipType, p,selectedOrientation);
+				} catch (DomainException e1) {
+					JOptionPane.showMessageDialog(null, e1.getMessage(),"Warning",JOptionPane.WARNING_MESSAGE);
+				}
+			}
+			
+			mouseEntered(e);
+		}	
+		
+		private Position getPos(MouseEvent e){
+			JButton btn = (JButton)e.getSource();
+			String pos = btn.getActionCommand();
+			int x = Integer.parseInt(pos.substring(0, pos.indexOf(';')));				
+			int y = Integer.parseInt(pos.substring(pos.indexOf(';')+1,pos.length()));
+			return new Position(x, y);
+		}
+		
+		
 		private void changeColor(MouseEvent e,Color c){
-			if(isHumanBoard()){	
-				JButton btn = (JButton)e.getSource();
-				btn.setBackground(new Color(255,255,255));
-				String pos = btn.getActionCommand();
-				int x = Integer.parseInt(pos.substring(0, pos.indexOf(';')));
-				int y = Integer.parseInt(pos.substring(pos.indexOf(';')+1,pos.length()));
+			Position p = getPos(e);
+
+			if(isHumanBoard()){		
+				
+				int x = p.getX();
+				int y = p.getY();
 				int length = selectedShipType.getLength();
 				
 				for(int i=0;i<length;i++){
 					if(selectedOrientation == ShipOrientationEnum.HORIZONTAL){
-						if(x+i<boardWidth)
+						if(x+i<board.getSize().getWidth())
 							buttonMatrix[x+i][y].setBackground(c);
 					}else if(selectedOrientation == ShipOrientationEnum.VERTICAL){
-						if(y+i<boardHeight)
+						if(y+i<board.getSize().getHeight())
 							buttonMatrix[x][y+i].setBackground(c);
 					}
 				}
-				
-				BSBoard board = (BSBoard) controller.getBoard();
-				boolean[][] field = board.getField();
-				
-				for(int i=0;i<field.length;i++){
-					for (int j=0;j<field[0].length;j++){
-						if(field[i][j]){
-							buttonMatrix[i][j].setBackground(new Color(100,100,100));;
+								
+				for(Ship s : board.getShips()){
+					int xPos = s.getPos().getX();
+					int yPos = s.getPos().getY();
+					
+					for(int i = 0;i<s.getLength();i++){
+						if(s.getOrientation() == ShipOrientationEnum.VERTICAL){
+							buttonMatrix[xPos][yPos+i].setBackground(new Color(100,100,100));
+						}else if(s.getOrientation() == ShipOrientationEnum.HORIZONTAL){
+							buttonMatrix[xPos+i][yPos].setBackground(new Color(100,100,100));
 						}
-					}
-				}
-			}			
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {}
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			JButton button = (JButton)e.getComponent();
-			String pos = button.getActionCommand();
-			int x = Integer.parseInt(pos.substring(0, pos.indexOf(';')));
-			int y = Integer.parseInt(pos.substring(pos.indexOf(';')+1,pos.length()));
-			
-			
-			if(isHumanBoard()){
-				try {
-					System.out.println("x: " + x + "   y:  " +y);
-					controller.addShip(selectedShipType, new Position(x, y),selectedOrientation);
-				} catch (DomainException e1) {
-					JOptionPane.showMessageDialog(null, e1.getMessage(),"Warning",JOptionPane.WARNING_MESSAGE);
-				}
-				
-				BSBoard board = (BSBoard) controller.getBoard();
-				boolean[][] field = board.getField();
-				
-				for(int i=0;i<field.length;i++){
-					for (int j=0;j<field[0].length;j++){
-						if(field[i][j]){
-							buttonMatrix[i][j].setBackground(new Color(100,100,100));;
-						}
-					}
-				}				
+					}	
+				}		
 			}
-			
-		}		
-	}
-
-	public void update() {
-		if(isHumanBoard()){
-			controller.GetHumanBoard();
-		}else{
-			controller.getComputerBoard();
 		}
 		
+		@Override
+		public void mousePressed(MouseEvent e) {}
+		
+		@Override
+		public void mouseReleased(MouseEvent e) {}
 	}
+
 }
