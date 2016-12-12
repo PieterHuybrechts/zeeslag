@@ -57,6 +57,7 @@ public class PlayerPanel extends JPanel{
 		boardWidth = board.getSize().getWidth();
 		boardHeight = board.getSize().getHeight();
 		
+		
 		buttonMatrix = new JButton[boardWidth][boardHeight];
 		
 		
