@@ -215,5 +215,9 @@ public class BSBoard implements Board{
 		// TODO Auto-generated method stub
 		return 5;
 	}
+	
+	public List<Ship> getShips(){
+		return this.schepen;
+	}
 
 }

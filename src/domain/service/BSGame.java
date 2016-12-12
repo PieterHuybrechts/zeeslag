@@ -85,4 +85,12 @@ public class BSGame implements BoardGame{
 		return human.getBoard().isValidMove(type,orientation,pos);
 		
 	}
+	
+	public Player getHuman(){
+		return this.human;
+	}
+	
+	public Player getComputer(){
+		return this.computer;
+	}
 }

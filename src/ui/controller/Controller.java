@@ -1,7 +1,11 @@
 package ui.controller;
 
+import java.util.List;
+
 import domain.DomainException;
+import domain.model.BSBoard;
 import domain.model.Board;
+import domain.model.Ship;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
 import domain.model.lib.BoardDimension;
@@ -63,6 +67,16 @@ public class Controller {
 
 	public boolean isValidMove(ShipEnum type, ShipOrientationEnum orientation, Position pos) {
 		return facade.isValidMove(type,orientation,pos);
+	}
+
+	public BSBoard GetHumanBoard() {
+		return facade.getHumandBoard();
+		
+	}
+
+	public BSBoard getComputerBoard() {
+		return facade.getComputerBoard();
+		
 	}
 
 }

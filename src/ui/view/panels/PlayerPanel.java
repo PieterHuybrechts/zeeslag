@@ -187,7 +187,11 @@ public class PlayerPanel extends JPanel{
 	}
 
 	public void update() {
-		
+		if(isHumanBoard()){
+			controller.GetHumanBoard();
+		}else{
+			controller.getComputerBoard();
+		}
 		
 	}
 }

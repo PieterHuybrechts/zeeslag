@@ -1,7 +1,10 @@
 package domain.service;
 
+import java.util.List;
+
 import common.Observer;
 import domain.DomainException;
+import domain.model.BSBoard;
 import domain.model.Board;
 import domain.model.Ship;
 import domain.model.ShipEnum;
@@ -62,6 +65,16 @@ public class GameFacade {
 		BSGame g = (BSGame) game;
 		
 		return g.isValidMove(type,orientation,pos);
+	}
+	
+	public BSBoard getHumandBoard(){
+		BSGame g = (BSGame) game;
+		return (BSBoard) g.getHuman().getBoard();
+	}
+	
+	public BSBoard getComputerBoard(){
+		BSGame g = (BSGame) game;
+		return (BSBoard) g.getComputer().getBoard();
 	}
 	
 }
