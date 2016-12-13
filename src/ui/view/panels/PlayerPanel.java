@@ -109,7 +109,7 @@ public class PlayerPanel extends JPanel{
 			board = controller.GetHumanBoard();
 		}else{
 			board = controller.getComputerBoard();
-			
+			/*
 			for(Ship s : board.getShips()){
 				int xPos = s.getPos().getX();
 				int yPos = s.getPos().getY();
@@ -121,7 +121,7 @@ public class PlayerPanel extends JPanel{
 						buttonMatrix[xPos+i][yPos].setBackground(new Color(100,100,100));
 					}
 				}	
-			}
+			}*/
 		}
 		
 				
