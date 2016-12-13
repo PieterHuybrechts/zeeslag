@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -98,6 +99,15 @@ public class View extends JFrame implements Observer{
 		}
 		
 		leftPanel.add(radioButtonPanel);
+		
+		leftPanel.add(new JPanel());
+		leftPanel.add(new JPanel());
+		leftPanel.add(new JPanel());
+		
+		JButton startButton = new JButton("Start");
+		startButton.addActionListener(new startButtonLister());
+		leftPanel.add(startButton);
+		
 		contentPanel.add(leftPanel);
 		
 		// PlayerPanels
@@ -136,6 +146,16 @@ public class View extends JFrame implements Observer{
 			player1Panel.setCurrentShipOrientation(o);
 			player1Panel.setCurrentShipType((ShipEnum) shipTypeCB.getSelectedItem());
 		}
+	}
+	
+	private class startButtonLister implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			controller.start();
+			
+		}
+		
 	}
 
 	@Override
