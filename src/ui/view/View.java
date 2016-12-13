@@ -152,8 +152,7 @@ public class View extends JFrame implements Observer{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			controller.start();
-			
+			controller.startGame();
 		}
 		
 	}

@@ -28,6 +28,10 @@ public class Controller {
 		view.startNameEntryView();
 		view.startGameView();
 	}
+	
+	public void startGame(){
+		
+	}
 
 	/*************************
 	 *    ADD INFORMATION    *
