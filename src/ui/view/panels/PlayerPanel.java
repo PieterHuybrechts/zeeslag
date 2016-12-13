@@ -76,14 +76,16 @@ public class PlayerPanel extends JPanel{
 		//ButtonPanel
 		
 		JPanel buttonPanel = new JPanel(new GridLayout(boardHeight,boardWidth));
+		BtnListener btnListener = new BtnListener();
+		Dimension d = new Dimension(25, 25);
 		for(int y=0;y<boardHeight;y++){
 			for(int x=0;x<boardWidth;x++){
 				//y=row
 				//x=column
 				JButton tempButton = new JButton();
 				tempButton.setActionCommand(x+";"+y);
-				tempButton.addMouseListener(new BtnListener());					
-				tempButton.setPreferredSize(new Dimension(25,25));
+				tempButton.addMouseListener(btnListener);					
+				tempButton.setPreferredSize(d);
 				buttonPanel.add(tempButton);
 				buttonMatrix[x][y] = tempButton;
 			}
