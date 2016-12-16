@@ -76,5 +76,10 @@ public class GameFacade {
 		BSGame g = (BSGame) game;
 		return (BSBoard) g.getComputer().getBoard();
 	}
+
+	public void startGame() {
+		// TODO Auto-generated method stub
+		this.game.start();
+	}
 	
 }

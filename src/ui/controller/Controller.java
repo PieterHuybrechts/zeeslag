@@ -30,7 +30,7 @@ public class Controller {
 	}
 	
 	public void startGame(){
-		
+		facade.startGame();
 	}
 
 	/*************************

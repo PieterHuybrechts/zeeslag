@@ -7,17 +7,24 @@ import common.Observer;
 import domain.DomainException;
 import domain.model.Board;
 import domain.model.Computer;
+import domain.model.GameState;
 import domain.model.Human;
+import domain.model.NewState;
 import domain.model.Player;
 import domain.model.Ship;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
+import domain.model.StartedState;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
 
 public class BSGame implements BoardGame{
 
 	private final List<Observer> observers = new ArrayList<Observer>();
+	
+	private GameState newState = new NewState(this);
+	private GameState startedState = new StartedState(this);
+	private GameState currentState= newState;
 	
 	private Player human;
 	private Player computer;
@@ -39,8 +46,13 @@ public class BSGame implements BoardGame{
 	}
 
 	@Override
-	public void Start() {
+	public void start() {
 		//TODO implement
+		if(this.human.getBSBoard().getShips().size() != 5){
+			throw new IllegalArgumentException(">>>>>>>>>>>>>>>>nog geen 5 schepen hoezeee<<<<<<<<<<<<<<");
+		} else{
+			this.currentState.start();
+		}
 	}
 
 	public void addHuman(String name) throws DomainException {
@@ -92,5 +104,30 @@ public class BSGame implements BoardGame{
 	
 	public Player getComputer(){
 		return this.computer;
+	}
+
+	@Override
+	public void setState(GameState state) {
+		// TODO Auto-generated method stub
+		this.currentState = state;
+		System.out.println(currentState.toString());
+	}
+
+	@Override
+	public void newGame() {
+		// TODO Auto-generated method stub
+		this.currentState.start();
+	}
+
+	@Override
+	public GameState getStartedState() {
+		// TODO Auto-generated method stub
+		return this.startedState;
+	}
+
+	@Override
+	public GameState getNewSate() {
+		// TODO Auto-generated method stub
+		return this.newState;
 	}
 }
