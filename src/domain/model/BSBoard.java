@@ -9,7 +9,7 @@ import domain.model.lib.Position;
 
 public class BSBoard implements Board{
 	
-	private boolean[][] field;
+	private Cell[][] field;
 	private BoardDimension dimension;
 	private List<Ship> schepen = new ArrayList<Ship>();
 	private static final int  MAX_AANTAL_VLIEGDEKSCHIP=1;
@@ -18,8 +18,13 @@ public class BSBoard implements Board{
 	private static final int  MAX_AANTAL_TORPEDOBOOTJAGER=3;
 	private static final int  MAX_AANTAL_PATROUILLESCHIP=4;
 	public BSBoard(){
-		setField(new boolean[10][10]);
 		dimension = new BoardDimension(10, 10);
+		setField(new Cell[dimension.getWidth()][dimension.getHeight()]);
+		for(int y=0;y<dimension.getHeight();y++){
+			for(int x=0;x<dimension.getWidth();x++){
+				field[x][y]= new Cell();
+			}
+		}
 	}
 
 	@Override
@@ -27,11 +32,11 @@ public class BSBoard implements Board{
 		return dimension;
 	}
 
-	public boolean[][] getField() {
+	public Cell[][] getField() {
 		return field;
 	}
 
-	private void setField(boolean[][] field) {
+	private void setField(Cell[][] field) {
 		this.field = field;
 	}
 
@@ -42,11 +47,13 @@ public class BSBoard implements Board{
 				switch(ship.getOrientation()){
 				case VERTICAL:
 					if(ship.getPos().getY()+i<getSize().getWidth())
-						getField()[ship.getPos().getX()][ship.getPos().getY()+i] = true;
+						//getField()[ship.getPos().getX()][ship.getPos().getY()+i] = true;
+						getField()[ship.getPos().getX()][ship.getPos().getY()+i].setShip(ship);
 					break;
 				case HORIZONTAL:
 					if(ship.getPos().getX()+i<getSize().getHeight())
-						getField()[ship.getPos().getX()+i][ship.getPos().getY()] = true;
+						//getField()[ship.getPos().getX()+i][ship.getPos().getY()] = true;
+						getField()[ship.getPos().getX()+i][ship.getPos().getY()].setShip(ship);
 					break;
 				}
 			}
@@ -90,11 +97,11 @@ public class BSBoard implements Board{
 	for(int i=0;i<ship.getLength();i++){
 		switch(orientation){
 		case VERTICAL:
-			if(getField()[pos.getX()][pos.getY()+i] == true)
+			if(getField()[pos.getX()][pos.getY()+i].isShip())
 				return false;
 			break;
 		case HORIZONTAL:
-			if(	getField()[pos.getX()+i][pos.getY()] == true)
+			if(	getField()[pos.getX()+i][pos.getY()].isShip())
 			return false;
 			break;
 		}
@@ -201,12 +208,16 @@ public class BSBoard implements Board{
 
 	@Override
 	public int getMaxAmountOfPieces() {
-		// TODO Auto-generated method stub
 		return 5;
 	}
 	
 	public List<Ship> getShips(){
 		return this.schepen;
+	}
+
+	@Override
+	public void hit(Position pos) {
+		field[pos.getX()][pos.getY()].hit();;
 	}
 
 }

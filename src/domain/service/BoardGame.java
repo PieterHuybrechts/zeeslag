@@ -5,6 +5,7 @@ import domain.model.Board;
 import domain.model.GameState;
 import domain.model.Ship;
 import domain.model.lib.BoardDimension;
+import domain.model.lib.Position;
 
 public interface BoardGame extends Subject{
 
@@ -17,5 +18,6 @@ public interface BoardGame extends Subject{
 	public GameState getStartedState();
 	public GameState getNewSate();
 	public boolean isStarted();
+	public void hit(Position pos);
 	
 }

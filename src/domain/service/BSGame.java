@@ -29,6 +29,8 @@ public class BSGame implements BoardGame{
 	private Player human;
 	private Player computer;
 	
+	
+	
 	public BSGame() throws DomainException{
 		human = new Human("Human");
 		computer = new Computer("Computer");
@@ -47,7 +49,6 @@ public class BSGame implements BoardGame{
 
 	@Override
 	public void start() {
-		//TODO implement
 		if(this.human.getBSBoard().getShips().size() != 5){
 			throw new IllegalArgumentException(">>>>>>>>>>>>>>>>nog geen 5 schepen hoezeee<<<<<<<<<<<<<<");
 		} else{
@@ -66,7 +67,6 @@ public class BSGame implements BoardGame{
 			this.human.addShip(ship);
 			notifyObservers();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -108,32 +108,32 @@ public class BSGame implements BoardGame{
 
 	@Override
 	public void setState(GameState state) {
-		// TODO Auto-generated method stub
 		this.currentState = state;
 		System.out.println(currentState.toString());
 	}
 
 	@Override
 	public void newGame() {
-		// TODO Auto-generated method stub
 		this.currentState.start();
 	}
 
 	@Override
 	public GameState getStartedState() {
-		// TODO Auto-generated method stub
 		return this.startedState;
 	}
 
 	@Override
 	public GameState getNewSate() {
-		// TODO Auto-generated method stub
 		return this.newState;
 	}
 
 	@Override
-	public boolean isStarted() {
-	
+	public boolean isStarted() {	
 		return this.currentState.equals(startedState);
+	}
+
+	@Override
+	public void hit(Position pos) {	
+		getBoard().hit(pos);
 	}
 }

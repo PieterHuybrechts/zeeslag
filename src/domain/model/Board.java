@@ -9,4 +9,5 @@ public interface Board {
 	public boolean isValidMove(Ship ship);
 	public int getMaxAmountOfPieces();
 	public boolean isValidMove(ShipEnum type, ShipOrientationEnum orientation, Position pos);
+	public void hit(Position pos);
 }

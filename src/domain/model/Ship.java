@@ -9,6 +9,7 @@ public class Ship {
 	private int length;
 	private Position pos;
 	private ShipOrientationEnum orientation;
+	private int lives;
 	
 	public Ship() throws DomainException {
 		this("",0);
@@ -25,14 +26,24 @@ public class Ship {
 	public Ship(String name,int length) throws DomainException{
 		setName(name);
 		setLength(length);
+		setLives(length);
 	}
 	public Ship(String name,int length,Position pos, ShipOrientationEnum or) throws DomainException{
 		setName(name);
 		setLength(length);
 		this.setPos(pos);
 		this.setOrientation(or);
+		setLives(length);
 	}
 	
+	private void setLives(int lives) throws DomainException {
+		if(lives<1){
+			throw new DomainException("A ship can't be smaller than 1");
+		}
+		
+		this.lives = lives;
+	}
+
 	private void setName(String name) throws DomainException{
 		if(name == null || name.isEmpty()){
 			throw new DomainException("A shipname can't be empty");
@@ -71,6 +82,14 @@ public class Ship {
 
 	public void setPos(Position pos) {
 		this.pos = pos;
+	}
+
+	public void hit() {
+		lives--;		
+	}
+	
+	public boolean isSunken(){
+		return lives<=0;
 	}
 
 }

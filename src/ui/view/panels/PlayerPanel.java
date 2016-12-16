@@ -17,6 +17,7 @@ import ui.controller.Controller;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Color;
@@ -80,6 +81,9 @@ public class PlayerPanel extends JPanel{
 				//y=row
 				//x=column
 				JButton tempButton = new JButton();
+				tempButton.setMargin(new Insets(0, 0, 0, 0));
+				tempButton.setAlignmentX(CENTER_ALIGNMENT);
+				tempButton.setAlignmentY(CENTER_ALIGNMENT);
 				tempButton.setActionCommand(x+";"+y);
 				tempButton.addMouseListener(btnListener);					
 				tempButton.setPreferredSize(d);
@@ -151,9 +155,11 @@ public class PlayerPanel extends JPanel{
 				}
 			} else {
 				JButton btn = (JButton)e.getSource();
-				btn.setText("X");
-//				btn.setFont(new Font("Arial", Font.PLAIN, 10));
-				btn.setEnabled(false);
+				//btn.setText("X");
+				//btn.setFont(new Font("Arial", Font.PLAIN, 10));
+				//btn.setEnabled(false);
+				
+				
 			}
 			
 			mouseEntered(e);
