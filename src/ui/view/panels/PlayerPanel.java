@@ -52,10 +52,6 @@ public class PlayerPanel extends JPanel{
 		}else{
 			board = c.getComputerBoard();
 			name = c.getNameComputer();
-			
-			
-			
-			
 		}
 		
 		boardWidth = board.getSize().getWidth();
@@ -113,9 +109,6 @@ public class PlayerPanel extends JPanel{
 		}else{
 			board = controller.getComputerBoard();
 		}
-		
-				
-		
 	}
 	
 	public void setButtonsEnabled(boolean enabled) {
