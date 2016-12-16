@@ -217,7 +217,11 @@ public class BSBoard implements Board{
 
 	@Override
 	public boolean hit(Position pos) throws DomainException {
-		return field[pos.getX()][pos.getY()].hit();
+		if(pos!=null){
+			return field[pos.getX()][pos.getY()].hit();			
+		}
+		
+		return false;
 	}
 
 }

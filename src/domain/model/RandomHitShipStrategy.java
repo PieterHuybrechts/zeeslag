@@ -29,11 +29,13 @@ public class RandomHitShipStrategy implements HitShipStrategy {
 	@Override
 	public Position hitShip() {
 		// TODO Auto-generated method stub
-		int i = r.nextInt(this.nothittedPostion.size());
-		Position pos = this.nothittedPostion.get(i);
-		this.nothittedPostion.remove(pos);
-		return pos;
-	
+		if(nothittedPostion!=null && !nothittedPostion.isEmpty()){
+			int i = r.nextInt(this.nothittedPostion.size());
+			Position pos = this.nothittedPostion.get(i);
+			this.nothittedPostion.remove(pos);
+			return pos;				
+		}
+		return null;
 	}
 	
 }
