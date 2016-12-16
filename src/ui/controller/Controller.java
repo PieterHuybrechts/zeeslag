@@ -92,4 +92,12 @@ public class Controller {
 		facade.hit(p);
 	}
 
+	public int getHumanScore() {
+		return facade.getHumanScore();
+	}
+
+	public int getComputerScore() {
+		return facade.getComputerScore();
+	}
+
 }

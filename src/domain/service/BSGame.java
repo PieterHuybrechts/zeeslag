@@ -135,12 +135,24 @@ public class BSGame implements BoardGame{
 	@Override
 	public void hit(Position pos) {
 		try{
-			computer.getBoard().hit(pos);
+			//computer.getBoard().hit(pos);
+			
+			computer.hit(pos);
 			Computer c = (Computer) computer;
-			c.hit(human.getBoard());
+			c.hit(human);
 			notifyObservers();			
 		}catch(DomainException e){
 			
 		}	
+	}
+
+	@Override
+	public int getComputerScore() {
+		return computer.getScore();
+	}
+
+	@Override
+	public int getHumanScore() {
+		return human.getScore();
 	}
 }

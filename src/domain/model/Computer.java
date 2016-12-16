@@ -22,10 +22,10 @@ public class Computer extends Player{
 			addShip(ship);
 		}
 	}
-	public void hit(Board b){
+	public void hit(Player human){
 		Position pos = hitStrat.hitShip();
 		try {
-			b.hit(pos);
+			human.hit(pos);
 		} catch (DomainException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

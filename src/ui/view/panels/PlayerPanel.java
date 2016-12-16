@@ -37,6 +37,8 @@ public class PlayerPanel extends JPanel {
 	private JButton[][] buttonMatrix;
 	private ShipOrientationEnum selectedOrientation;
 	private ShipEnum selectedShipType;
+	String name;
+	JLabel nameLbl;
 
 	public PlayerPanel(Controller c, boolean humanPlayer) {
 		controller = c;
@@ -44,15 +46,17 @@ public class PlayerPanel extends JPanel {
 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-		String name;
 		int boardWidth;
 		int boardHeight;
+		int score;
 
 		if (humanPlayer) {
 			board = c.GetHumanBoard();
+			score = c.getHumanScore();
 			name = c.getNameHuman();
 		} else {
 			board = c.getComputerBoard();
+			score = c.getComputerScore();
 			name = c.getNameComputer();
 		}
 
@@ -67,7 +71,7 @@ public class PlayerPanel extends JPanel {
 		FlowLayout flowLayout = (FlowLayout) nameLblPnl.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		add(nameLblPnl);
-		JLabel nameLbl = new JLabel(name);
+		nameLbl = new JLabel(name+" ("+score+")");
 		nameLblPnl.add(nameLbl);
 
 		// ButtonPanel
@@ -107,11 +111,18 @@ public class PlayerPanel extends JPanel {
 	}
 
 	public void update() {
+		
+		int score;
+		
 		if (isHumanBoard()) {
 			board = controller.GetHumanBoard();
+			score = controller.getHumanScore();
 		} else {
 			board = controller.getComputerBoard();
+			score = controller.getComputerScore();
 		}
+		
+		nameLbl.setText(name+" ("+score+")");
 
 		updateColors();
 	}

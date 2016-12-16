@@ -19,5 +19,7 @@ public interface BoardGame extends Subject{
 	public GameState getNewSate();
 	public boolean isStarted();
 	public void hit(Position pos);
+	public int getComputerScore();
+	public int getHumanScore();
 	
 }

@@ -28,15 +28,19 @@ public class Cell {
 		return ship.isSunken();
 	}
 	
-	public void hit() throws DomainException{
+	public boolean hit() throws DomainException{
 		if(hit){
 			throw new DomainException("Positie is al geraakt.");
 		}
 		
+		boolean b = false;
+		
 		if(!hit && this.ship!=null){
 			ship.hit();
+			b = true;
 		}
 		this.hit=true;
+		return b;
 	}
 	
 	

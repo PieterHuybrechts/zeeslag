@@ -7,10 +7,12 @@ public abstract class Player {
 
 	private String name;
 	private Board board;
+	private int score;
 	
 	public Player(String name,Board board) throws DomainException{
 		setName(name);
 		setBoard(board);
+		score=19;
 	}
 	
 	public String getName(){
@@ -42,8 +44,15 @@ public abstract class Player {
 	public void addShip(Ship ship){
 		this.getBSBoard().addShip(ship);
 	}
-
-		// TODO Auto-generated method stub
-		
+	
+	public void hit(Position pos) throws DomainException{
+		if(getBoard().hit(pos)){
+			score--;
+		}
 	}
+	
+	public int getScore(){
+		return this.score;
+	}
+}
 

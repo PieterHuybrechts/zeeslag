@@ -89,5 +89,13 @@ public class GameFacade {
 	public void hit(Position p) {
 		game.hit(p);
 	}
+
+	public int getHumanScore() {
+		return game.getHumanScore();
+	}
+
+	public int getComputerScore() {
+		return game.getComputerScore();
+	}
 	
 }
