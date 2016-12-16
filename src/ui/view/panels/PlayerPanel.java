@@ -109,6 +109,7 @@ public class PlayerPanel extends JPanel{
 	public void update() {		
 		if(isHumanBoard()){
 			board = controller.GetHumanBoard();
+			
 		}else{
 			board = controller.getComputerBoard();
 		}
@@ -117,6 +118,15 @@ public class PlayerPanel extends JPanel{
 		
 	}
 	
+	public void setButtonsEnabled(boolean enabled) {
+		for(int y=0;y<board.getSize().getHeight();y++){
+			for(int x=0;x<board.getSize().getWidth();x++){
+				buttonMatrix[x][y].setEnabled(enabled);
+			}
+		}
+		
+	}
+
 	private class BtnListener implements MouseListener{
 		@Override
 		public void mouseEntered(MouseEvent e) {

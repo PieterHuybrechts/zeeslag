@@ -81,5 +81,9 @@ public class GameFacade {
 		// TODO Auto-generated method stub
 		this.game.start();
 	}
+
+	public boolean isStarted() {
+		return game.isStarted();
+	}
 	
 }

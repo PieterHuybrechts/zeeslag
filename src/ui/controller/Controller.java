@@ -83,4 +83,9 @@ public class Controller {
 		
 	}
 
+	public boolean isStarted() {
+		return facade.isStarted();
+		
+	}
+
 }

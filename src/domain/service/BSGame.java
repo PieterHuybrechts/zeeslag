@@ -130,4 +130,10 @@ public class BSGame implements BoardGame{
 		// TODO Auto-generated method stub
 		return this.newState;
 	}
+
+	@Override
+	public boolean isStarted() {
+	
+		return this.currentState.equals(startedState);
+	}
 }

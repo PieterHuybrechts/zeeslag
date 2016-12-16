@@ -16,5 +16,6 @@ public interface BoardGame extends Subject{
 	public void newGame();
 	public GameState getStartedState();
 	public GameState getNewSate();
+	public boolean isStarted();
 	
 }

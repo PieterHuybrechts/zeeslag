@@ -118,7 +118,9 @@ public class View extends JFrame implements Observer{
 		
 		player2Panel = new PlayerPanel(controller,false);
 		player2Panel.setBorder(BorderFactory.createEmptyBorder(0, 5, 10, 10));
+		player2Panel.setButtonsEnabled(false);
 		contentPanel.add(player2Panel);
+		
 		
 		// show frame
 		
@@ -152,9 +154,12 @@ public class View extends JFrame implements Observer{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			try {controller.startGame();
+			try {
+				controller.startGame();
 				JButton button = (JButton)e.getSource();
 				button.setEnabled(false);
+				player1Panel.setButtonsEnabled(false);
+				player2Panel.setButtonsEnabled(true);
 			}
 			catch(Exception ee){
 				JOptionPane.showMessageDialog(null, ee.getMessage(),"WARNING",JOptionPane.WARNING_MESSAGE);
