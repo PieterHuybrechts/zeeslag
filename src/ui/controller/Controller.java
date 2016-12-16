@@ -88,4 +88,8 @@ public class Controller {
 		
 	}
 
+	public void hit(Position p) {
+		facade.hit(p);
+	}
+
 }

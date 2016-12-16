@@ -85,5 +85,9 @@ public class GameFacade {
 	public boolean isStarted() {
 		return game.isStarted();
 	}
+
+	public void hit(Position p) {
+		game.hit(p);
+	}
 	
 }

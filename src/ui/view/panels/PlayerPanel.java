@@ -155,9 +155,10 @@ public class PlayerPanel extends JPanel{
 				}
 			} else {
 				JButton btn = (JButton)e.getSource();
-				//btn.setText("X");
-				//btn.setFont(new Font("Arial", Font.PLAIN, 10));
-				//btn.setEnabled(false);
+				controller.hit(p);
+				btn.setText("X");
+				btn.setFont(new Font("Arial", Font.PLAIN, 10));
+				btn.setEnabled(false);
 				
 				
 			}
