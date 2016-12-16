@@ -141,7 +141,7 @@ public class PlayerPanel extends JPanel{
 			
 			if(isHumanBoard()){
 				try {
-					System.out.println("x: " + p.getX() + "   y:  " +p.getY());
+					//System.out.println("x: " + p.getX() + "   y:  " +p.getY());
 					controller.addShip(selectedShipType, p,selectedOrientation);
 				} catch (DomainException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage(),"Warning",JOptionPane.WARNING_MESSAGE);

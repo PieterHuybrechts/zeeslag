@@ -153,9 +153,9 @@ public class View extends JFrame implements Observer{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			try {controller.startGame();
-		
-			JButton button = (JButton)e.getSource();
-			button.disable();}
+				JButton button = (JButton)e.getSource();
+				button.setEnabled(false);
+			}
 			catch(Exception ee){
 				JOptionPane.showMessageDialog(null, ee.getMessage(),"WARNING",JOptionPane.WARNING_MESSAGE);
 			}
