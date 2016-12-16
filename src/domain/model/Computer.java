@@ -1,15 +1,18 @@
 package domain.model;
 
 import domain.DomainException;
+import domain.HitShipFactory;
 import domain.PlaceShipFactory;
+import domain.model.lib.Position;
 
 public class Computer extends Player{
-
-	PlaceShipStrategy strat;
 	
+	PlaceShipStrategy strat;
+	HitShipStrategy hitStrat;
 	public Computer(String name) throws DomainException{
 		super(name,new BSBoard());
 		strat = new PlaceShipFactory().getPlaceShipStrategy();
+		hitStrat = new HitShipFactory().getHitShipStrategy();
 		createShips();
 	}
 	
@@ -18,5 +21,9 @@ public class Computer extends Player{
 			Ship ship= strat.createShip(getBoard());
 			addShip(ship);
 		}
+	}
+	private void hit(){
+		Position pos = hitStrat.hitShip();
+		
 	}
 }
