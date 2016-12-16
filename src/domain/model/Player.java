@@ -1,6 +1,7 @@
 package domain.model;
 
 import domain.DomainException;
+import domain.model.lib.Position;
 
 public abstract class Player {
 
@@ -41,4 +42,8 @@ public abstract class Player {
 	public void addShip(Ship ship){
 		this.getBSBoard().addShip(ship);
 	}
-}
+
+		// TODO Auto-generated method stub
+		
+	}
+

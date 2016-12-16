@@ -135,6 +135,8 @@ public class BSGame implements BoardGame{
 	@Override
 	public void hit(Position pos) {	
 		computer.getBoard().hit(pos);
+		Computer c = (Computer) computer;
+		c.hit(human.getBoard());;
 		notifyObservers();
 	}
 }

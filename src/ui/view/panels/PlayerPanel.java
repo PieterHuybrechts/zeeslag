@@ -131,7 +131,7 @@ public class PlayerPanel extends JPanel{
 					}
 				}	
 			}
-		}else{
+		}
 			for(int y=0;y<board.getSize().getHeight();y++){
 				for(int x=0;x<board.getSize().getWidth();x++){
 					Cell cell = board.getField()[x][y];
@@ -149,7 +149,7 @@ public class PlayerPanel extends JPanel{
 						}
 					}
 				}
-			}
+			
 			
 			
 			
@@ -196,6 +196,7 @@ public class PlayerPanel extends JPanel{
 				}
 			} else {
 				controller.hit(p);
+				
 				/*JButton btn = (JButton)e.getSource();
 				btn.setText("X");
 				btn.setFont(new Font("Arial", Font.PLAIN, 10));

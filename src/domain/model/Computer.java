@@ -22,8 +22,8 @@ public class Computer extends Player{
 			addShip(ship);
 		}
 	}
-	private void hit(){
+	public void hit(Board b){
 		Position pos = hitStrat.hitShip();
-		
+		b.hit(pos);
 	}
 }
