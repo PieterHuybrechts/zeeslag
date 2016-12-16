@@ -81,8 +81,6 @@ public class PlayerPanel extends JPanel {
 		Dimension d = new Dimension(25, 25);
 		for (int y = 0; y < boardHeight; y++) {
 			for (int x = 0; x < boardWidth; x++) {
-				// y=row
-				// x=column
 				JButton tempButton = new JButton();
 				tempButton.setMargin(new Insets(0, 0, 0, 0));
 				tempButton.setAlignmentX(CENTER_ALIGNMENT);
@@ -168,7 +166,6 @@ public class PlayerPanel extends JPanel {
 				buttonMatrix[x][y].setEnabled(enabled);
 			}
 		}
-
 	}
 
 	private class BtnListener implements MouseListener {
@@ -195,20 +192,12 @@ public class PlayerPanel extends JPanel {
 
 			if (isHumanBoard()) {
 				try {
-					// System.out.println("x: " + p.getX() + " y: " +p.getY());
 					controller.addShip(selectedShipType, p, selectedOrientation);
 				} catch (DomainException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
 				}
 			} else {
 				controller.hit(p);
-
-				/*
-				 * JButton btn = (JButton)e.getSource(); btn.setText("X");
-				 * btn.setFont(new Font("Arial", Font.PLAIN, 10));
-				 * btn.setEnabled(false);
-				 */
-
 			}
 		}
 
