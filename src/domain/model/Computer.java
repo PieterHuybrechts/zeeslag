@@ -24,6 +24,11 @@ public class Computer extends Player{
 	}
 	public void hit(Board b){
 		Position pos = hitStrat.hitShip();
-		b.hit(pos);
+		try {
+			b.hit(pos);
+		} catch (DomainException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -1,5 +1,6 @@
 package domain.model;
 
+import domain.DomainException;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
 
@@ -9,5 +10,5 @@ public interface Board {
 	public boolean isValidMove(Ship ship);
 	public int getMaxAmountOfPieces();
 	public boolean isValidMove(ShipEnum type, ShipOrientationEnum orientation, Position pos);
-	public void hit(Position pos);
+	public void hit(Position pos) throws DomainException;
 }

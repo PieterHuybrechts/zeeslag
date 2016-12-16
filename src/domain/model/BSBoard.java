@@ -216,8 +216,8 @@ public class BSBoard implements Board{
 	}
 
 	@Override
-	public void hit(Position pos) {
-		field[pos.getX()][pos.getY()].hit();;
+	public void hit(Position pos) throws DomainException {
+		field[pos.getX()][pos.getY()].hit();
 	}
 
 }

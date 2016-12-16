@@ -1,5 +1,7 @@
 package domain.model;
 
+import domain.DomainException;
+
 public class Cell {
 
 	private boolean hit;
@@ -26,7 +28,11 @@ public class Cell {
 		return ship.isSunken();
 	}
 	
-	public void hit(){
+	public void hit() throws DomainException{
+		if(hit){
+			throw new DomainException("Positie is al geraakt.");
+		}
+		
 		if(!hit && this.ship!=null){
 			ship.hit();
 		}
