@@ -15,6 +15,7 @@ import domain.model.lib.Position;
 import ui.controller.Controller;
 
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -105,7 +106,6 @@ public class PlayerPanel extends JPanel{
 	public void update() {		
 		if(isHumanBoard()){
 			board = controller.GetHumanBoard();
-			
 		}else{
 			board = controller.getComputerBoard();
 		}
@@ -149,6 +149,11 @@ public class PlayerPanel extends JPanel{
 				} catch (DomainException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage(),"Warning",JOptionPane.WARNING_MESSAGE);
 				}
+			} else {
+				JButton btn = (JButton)e.getSource();
+				btn.setText("X");
+//				btn.setFont(new Font("Arial", Font.PLAIN, 10));
+				btn.setEnabled(false);
 			}
 			
 			mouseEntered(e);
