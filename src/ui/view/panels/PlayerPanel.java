@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import domain.DomainException;
 import domain.model.BSBoard;
+import domain.model.Cell;
 import domain.model.Ship;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
@@ -15,7 +16,6 @@ import domain.model.lib.Position;
 import ui.controller.Controller;
 
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
@@ -109,9 +109,50 @@ public class PlayerPanel extends JPanel{
 
 	public void update() {		
 		if(isHumanBoard()){
-			board = controller.GetHumanBoard();
+			board = controller.GetHumanBoard();			
 		}else{
 			board = controller.getComputerBoard();
+		}
+		
+		updateColors();
+	}
+	
+	private void updateColors(){
+		if(isHumanBoard()){
+			for(Ship s : board.getShips()){
+				int xPos = s.getPos().getX();
+				int yPos = s.getPos().getY();
+				
+				for(int i = 0;i<s.getLength();i++){
+					if(s.getOrientation() == ShipOrientationEnum.VERTICAL){
+						buttonMatrix[xPos][yPos+i].setBackground(new Color(100,100,100));
+					}else if(s.getOrientation() == ShipOrientationEnum.HORIZONTAL){
+						buttonMatrix[xPos+i][yPos].setBackground(new Color(100,100,100));
+					}
+				}	
+			}
+		}else{
+			for(int y=0;y<board.getSize().getHeight();y++){
+				for(int x=0;x<board.getSize().getWidth();x++){
+					Cell cell = board.getField()[x][y];
+					
+					if(cell.isHit()){
+						JButton btn = buttonMatrix[x][y];
+						if(cell.isShip()){
+							if(cell.isSunken()){
+								btn.setBackground(new Color(255, 0, 0));
+							}else{
+								btn.setBackground(new Color(255, 255, 0));;
+							}
+						}else{
+							btn.setText("x");
+						}
+					}
+				}
+			}
+			
+			
+			
 		}
 	}
 	
@@ -154,16 +195,14 @@ public class PlayerPanel extends JPanel{
 					JOptionPane.showMessageDialog(null, e1.getMessage(),"Warning",JOptionPane.WARNING_MESSAGE);
 				}
 			} else {
-				JButton btn = (JButton)e.getSource();
 				controller.hit(p);
+				/*JButton btn = (JButton)e.getSource();
 				btn.setText("X");
 				btn.setFont(new Font("Arial", Font.PLAIN, 10));
-				btn.setEnabled(false);
+				btn.setEnabled(false);*/
 				
 				
 			}
-			
-			mouseEntered(e);
 		}	
 		
 		private Position getPos(MouseEvent e){
@@ -192,23 +231,11 @@ public class PlayerPanel extends JPanel{
 						if(y+i<board.getSize().getHeight())
 							buttonMatrix[x][y+i].setBackground(c);
 					}
-				}
-								
-				
+				}	
 			}
 			
-			for(Ship s : board.getShips()){
-				int xPos = s.getPos().getX();
-				int yPos = s.getPos().getY();
-				
-				for(int i = 0;i<s.getLength();i++){
-					if(s.getOrientation() == ShipOrientationEnum.VERTICAL){
-						buttonMatrix[xPos][yPos+i].setBackground(new Color(100,100,100));
-					}else if(s.getOrientation() == ShipOrientationEnum.HORIZONTAL){
-						buttonMatrix[xPos+i][yPos].setBackground(new Color(100,100,100));
-					}
-				}	
-			}		
+			updateColors();
+			
 		}
 		
 		@Override

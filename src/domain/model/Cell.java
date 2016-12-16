@@ -22,8 +22,12 @@ public class Cell {
 		return this.ship!=null;
 	}
 	
+	public boolean isSunken(){
+		return ship.isSunken();
+	}
+	
 	public void hit(){
-		if(this.ship!=null){
+		if(!hit && this.ship!=null){
 			ship.hit();
 		}
 		this.hit=true;
