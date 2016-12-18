@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import domain.model.HitShipStrategy;
-import domain.model.PlaceShipStrategy;
 
 public class HitShipFactory {
 	public HitShipStrategy getHitShipStrategy() throws DomainException {
