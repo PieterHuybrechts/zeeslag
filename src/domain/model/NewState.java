@@ -24,5 +24,10 @@ public class NewState implements GameState {
 		// TODO Auto-generated method stub
 		throw new IllegalStateException("Can't start a new game when game isn't started yet.");
 	}
+	@Override
+	public void endGame() {
+		// TODO Auto-generated method stub
+		throw new IllegalStateException("A game that isn't started yet can't be ended");
+	}
 
 }

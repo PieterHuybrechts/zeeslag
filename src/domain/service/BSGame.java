@@ -3,11 +3,14 @@ package domain.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import common.Observer;
 import domain.DomainException;
 import domain.model.Board;
 import domain.model.Computer;
 import domain.model.GameOverState;
+import domain.model.EndedState;
 import domain.model.GameState;
 import domain.model.Human;
 import domain.model.NewState;
@@ -26,6 +29,7 @@ public class BSGame implements BoardGame,Observer{
 	private GameState newState = new NewState(this);
 	private GameState startedState = new StartedState(this);
 	private GameState gameOverState = new GameOverState(this);
+	private GameState endedState = new EndedState(this);
 	private GameState currentState= newState;
 	
 	private Player human;
@@ -184,7 +188,20 @@ public class BSGame implements BoardGame,Observer{
 		}
 		
 		if(humanAllSunk || computerAllSunk){
-			System.out.println("game over!!!");	
+			JOptionPane.showMessageDialog(null, "GameOver");
+			this.endGame();
 		}		
+	}
+
+	@Override
+	public GameState getEndedState() {
+		// TODO Auto-generated method stub
+		return this.endedState;
+	}
+
+	@Override
+	public void endGame() {
+		this.currentState.endGame();
+		
 	}
 }

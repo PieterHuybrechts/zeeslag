@@ -17,10 +17,13 @@ public interface BoardGame extends Subject{
 	public void newGame();
 	public GameState getStartedState();
 	public GameState getNewSate();
+	public GameState getEndedState();
+	public void endGame();
 	public boolean isStarted();
 	public void hit(Position pos);
 	public int getComputerScore();
 	public int getHumanScore();
 	public GameState getCurrentState();
+	
 	
 }

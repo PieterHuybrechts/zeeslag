@@ -22,4 +22,10 @@ public class GameOverState implements GameState{
 		
 	}
 
+	@Override
+	public void endGame() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
