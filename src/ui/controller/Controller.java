@@ -3,6 +3,7 @@ package ui.controller;
 import domain.DomainException;
 import domain.model.BSBoard;
 import domain.model.Board;
+import domain.model.GameState;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
 import domain.model.lib.BoardDimension;
@@ -95,6 +96,10 @@ public class Controller {
 
 	public int getComputerScore() {
 		return facade.getComputerScore();
+	}
+	
+	public GameState getGameState(){
+		return facade.getGameState();
 	}
 
 }

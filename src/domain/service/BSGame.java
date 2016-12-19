@@ -7,6 +7,7 @@ import common.Observer;
 import domain.DomainException;
 import domain.model.Board;
 import domain.model.Computer;
+import domain.model.GameOverState;
 import domain.model.GameState;
 import domain.model.Human;
 import domain.model.NewState;
@@ -24,6 +25,7 @@ public class BSGame implements BoardGame,Observer{
 	
 	private GameState newState = new NewState(this);
 	private GameState startedState = new StartedState(this);
+	private GameState gameOverState = new GameOverState(this);
 	private GameState currentState= newState;
 	
 	private Player human;
@@ -112,7 +114,7 @@ public class BSGame implements BoardGame,Observer{
 	@Override
 	public void setState(GameState state) {
 		this.currentState = state;
-		System.out.println(currentState.toString());
+		notifyObservers();
 	}
 
 	@Override
@@ -137,9 +139,7 @@ public class BSGame implements BoardGame,Observer{
 
 	@Override
 	public void hit(Position pos) {
-		try{
-			//computer.getBoard().hit(pos);
-			
+		try{			
 			computer.hit(pos);
 			Computer c = (Computer) computer;
 			c.hit(human);
@@ -157,6 +157,10 @@ public class BSGame implements BoardGame,Observer{
 	@Override
 	public int getHumanScore() {
 		return human.getScore();
+	}
+	
+	public GameState getCurrentState(){
+		return currentState;
 	}
 
 	@Override

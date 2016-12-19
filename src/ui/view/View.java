@@ -17,8 +17,12 @@ import javax.swing.JRadioButton;
 
 import common.Observer;
 import domain.DomainException;
+import domain.model.GameOverState;
+import domain.model.GameState;
+import domain.model.NewState;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
+import domain.model.StartedState;
 import ui.controller.Controller;
 import ui.view.panels.PlayerPanel;
 
@@ -31,6 +35,7 @@ public class View extends JFrame implements Observer{
 	private PlayerPanel player2Panel;
 	private JComboBox<ShipEnum> shipTypeCB;
 	private ButtonGroup radioButtonGroup;
+	private JButton startButton;
 	
 	
 	public View(Controller controller) {
@@ -104,7 +109,7 @@ public class View extends JFrame implements Observer{
 		leftPanel.add(new JPanel());
 		leftPanel.add(new JPanel());
 		
-		JButton startButton = new JButton("Start");
+		startButton = new JButton("Start");
 		startButton.addActionListener(new startButtonLister());
 		leftPanel.add(startButton);
 		
@@ -158,8 +163,6 @@ public class View extends JFrame implements Observer{
 				controller.startGame();
 				JButton button = (JButton)e.getSource();
 				button.setEnabled(false);
-				player1Panel.setButtonsEnabled(false);
-				player2Panel.setButtonsEnabled(true);
 			}
 			catch(Exception ee){
 				JOptionPane.showMessageDialog(null, ee.getMessage(),"WARNING",JOptionPane.WARNING_MESSAGE);
@@ -172,5 +175,20 @@ public class View extends JFrame implements Observer{
 	public void update() {
 		player1Panel.update();
 		player2Panel.update();
+		
+		String className = controller.getGameState().getClass().getName();
+		
+		if(className.equals(NewState.class.getName())){
+			player1Panel.setButtonsEnabled(true);
+			player2Panel.setButtonsEnabled(false);
+			startButton.setEnabled(true);
+		}else if(className.equals(StartedState.class.getName())){
+			player1Panel.setButtonsEnabled(false);
+			player2Panel.setButtonsEnabled(true);
+			startButton.setEnabled(false);
+		}else if(className.equals(GameOverState.class.getName())){
+			
+		}
+		
 	}
 }

@@ -4,6 +4,7 @@ import common.Observer;
 import domain.DomainException;
 import domain.model.BSBoard;
 import domain.model.Board;
+import domain.model.GameState;
 import domain.model.Ship;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
@@ -96,4 +97,7 @@ public class GameFacade {
 		return game.getComputerScore();
 	}
 	
+	public GameState getGameState(){
+		return game.getCurrentState();
+	}
 }
