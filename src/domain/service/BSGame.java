@@ -41,8 +41,7 @@ public class BSGame implements BoardGame,Observer{
 		human = new Human("Human");
 		computer = new Computer("Computer");
 		
-		human.getBSBoard().getShips().forEach(s -> s.addObserver(this));
-		computer.getBSBoard().getShips().forEach(s -> s.addObserver(this));
+
 	}
 	
 	public BoardDimension getBoardSize(){
@@ -62,6 +61,8 @@ public class BSGame implements BoardGame,Observer{
 			throw new IllegalArgumentException(">>>>>>>>>>>>>>>>nog geen 5 schepen hoezeee<<<<<<<<<<<<<<");
 		} else{
 			this.currentState.start();
+			human.getBSBoard().getShips().forEach(s -> s.addObserver(this));
+			computer.getBSBoard().getShips().forEach(s -> s.addObserver(this));
 		}
 	}
 
