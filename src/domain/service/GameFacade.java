@@ -1,7 +1,5 @@
 package domain.service;
 
-import java.util.List;
-
 import common.Observer;
 import domain.DomainException;
 import domain.model.BSBoard;
