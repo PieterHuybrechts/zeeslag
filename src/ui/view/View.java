@@ -190,6 +190,12 @@ public class View extends JFrame implements Observer{
 			player1Panel.setButtonsEnabled(false);
 			player2Panel.setButtonsEnabled(false);
 			
+			int ans = JOptionPane.showConfirmDialog(null, "Do you wan't to start a new game?", "Battleships", JOptionPane.YES_NO_OPTION);
+			if(ans == JOptionPane.YES_OPTION){
+				controller.restartGame();
+			}else if(ans == JOptionPane.NO_OPTION){
+				controller.quit();
+			}
 		}
 		
 	}

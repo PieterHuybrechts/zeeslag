@@ -24,6 +24,11 @@ public class GameFacade {
 		}
 	}
 
+	public void restartGame() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	public BoardDimension getBoardSize() {
 		return game.getBoardSize();
 	}
@@ -77,7 +82,6 @@ public class GameFacade {
 	}
 
 	public void startGame() {
-		// TODO Auto-generated method stub
 		this.game.start();
 	}
 
@@ -100,4 +104,6 @@ public class GameFacade {
 	public GameState getGameState(){
 		return game.getCurrentState();
 	}
+
+
 }

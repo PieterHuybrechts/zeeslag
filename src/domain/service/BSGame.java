@@ -20,7 +20,7 @@ import domain.model.StartedState;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
 
-public class BSGame implements BoardGame,Observer,Subject{
+public class BSGame implements BoardGame,Observer{
 
 	private final List<Observer> observers = new ArrayList<Observer>();
 	

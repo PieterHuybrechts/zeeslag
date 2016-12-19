@@ -30,6 +30,13 @@ public class Controller {
 	public void startGame(){
 		facade.startGame();
 	}
+	
+	public void restartGame(){
+		facade = new GameFacade();
+		facade.addObserver(view);
+		view.startNameEntryView();
+		view.startGameView();
+	}
 
 	/*************************
 	 *    ADD INFORMATION    *
@@ -100,6 +107,11 @@ public class Controller {
 	
 	public GameState getGameState(){
 		return facade.getGameState();
+	}
+
+	public void quit() {
+		System.exit(1);
+		
 	}
 
 }
