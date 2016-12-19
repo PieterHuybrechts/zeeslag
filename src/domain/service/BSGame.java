@@ -3,9 +3,8 @@ package domain.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import common.Observer;
+import common.Subject;
 import domain.DomainException;
 import domain.model.Board;
 import domain.model.Computer;
@@ -21,7 +20,7 @@ import domain.model.StartedState;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
 
-public class BSGame implements BoardGame,Observer{
+public class BSGame implements BoardGame,Observer,Subject{
 
 	private final List<Observer> observers = new ArrayList<Observer>();
 	
@@ -61,6 +60,7 @@ public class BSGame implements BoardGame,Observer{
 			this.currentState.start();
 			human.getBSBoard().getShips().forEach(s -> s.addObserver(this));
 			computer.getBSBoard().getShips().forEach(s -> s.addObserver(this));
+			notifyObservers();
 		}
 	}
 
@@ -117,12 +117,12 @@ public class BSGame implements BoardGame,Observer{
 	@Override
 	public void setState(GameState state) {
 		this.currentState = state;
-		notifyObservers();
 	}
 
 	@Override
 	public void newGame() {
 		this.currentState.start();
+		notifyObservers();
 	}
 
 	@Override
@@ -147,10 +147,12 @@ public class BSGame implements BoardGame,Observer{
 			
 			if(currentState!=endedState){
 				Computer c = (Computer) computer;
-				c.hit(human);				
+				c.hit(human);	
 			}
 			
-			notifyObservers();			
+			notifyObservers();
+			
+					
 		}catch(DomainException e){
 			
 		}

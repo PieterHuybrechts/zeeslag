@@ -187,9 +187,9 @@ public class View extends JFrame implements Observer{
 			player2Panel.setButtonsEnabled(true);
 			startButton.setEnabled(false);
 		}else if(className.equals(EndedState.class.getName())){
+			JOptionPane.showMessageDialog(null, "GameOver");
 			player1Panel.setButtonsEnabled(false);
 			player2Panel.setButtonsEnabled(false);
-			JOptionPane.showMessageDialog(null, "GameOver");
 			
 		}
 		
