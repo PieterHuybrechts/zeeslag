@@ -1,9 +1,14 @@
 package domain.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import common.Observer;
+import common.Subject;
 import domain.DomainException;
 import domain.model.lib.Position;
 
-public class Ship {
+public class Ship implements Subject{
 
 	private String name;
 	private int length;
@@ -11,8 +16,11 @@ public class Ship {
 	private ShipOrientationEnum orientation;
 	private int lives;
 	
+	private List<Observer> observers;
+	
 	public Ship() throws DomainException {
 		this("",0);
+		
 	}
 
 	public Ship(ShipEnum type) throws DomainException {
@@ -27,6 +35,7 @@ public class Ship {
 		setName(name);
 		setLength(length);
 		setLives(length);
+		observers = new ArrayList<Observer>();
 	}
 	public Ship(String name,int length,Position pos, ShipOrientationEnum or) throws DomainException{
 		setName(name);
@@ -34,6 +43,7 @@ public class Ship {
 		this.setPos(pos);
 		this.setOrientation(or);
 		setLives(length);
+		observers = new ArrayList<Observer>();
 	}
 	
 	private void setLives(int lives) throws DomainException {
@@ -85,11 +95,31 @@ public class Ship {
 	}
 
 	public void hit() {
-		lives--;		
+		lives--;	
+		
+		if(isSunken()){
+			notifyObservers();
+		}
+		
 	}
 	
 	public boolean isSunken(){
 		return lives<=0;
+	}
+
+	@Override
+	public void addObserver(Observer o) {
+		observers.add(o);		
+	}
+
+	@Override
+	public void removeObserver(Observer o) {
+		observers.remove(o);
+	}
+
+	@Override
+	public void notifyObservers() {
+		observers.forEach(o -> o.update());
 	}
 
 }

@@ -18,7 +18,7 @@ import domain.model.StartedState;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
 
-public class BSGame implements BoardGame{
+public class BSGame implements BoardGame,Observer{
 
 	private final List<Observer> observers = new ArrayList<Observer>();
 	
@@ -34,6 +34,9 @@ public class BSGame implements BoardGame{
 	public BSGame() throws DomainException{
 		human = new Human("Human");
 		computer = new Computer("Computer");
+		
+		human.getBSBoard().getShips().forEach(s -> s.addObserver(this));
+		computer.getBSBoard().getShips().forEach(s -> s.addObserver(this));
 	}
 	
 	public BoardDimension getBoardSize(){
@@ -144,7 +147,20 @@ public class BSGame implements BoardGame{
 		}catch(DomainException e){
 			
 		}
-		
+	}
+
+	@Override
+	public int getComputerScore() {
+		return computer.getScore();
+	}
+
+	@Override
+	public int getHumanScore() {
+		return human.getScore();
+	}
+
+	@Override
+	public void update() {
 		boolean humanAllSunk = true;
 		
 		for(Ship s : human.getBSBoard().getShips()){
@@ -164,18 +180,7 @@ public class BSGame implements BoardGame{
 		}
 		
 		if(humanAllSunk || computerAllSunk){
-			System.out.println("game over!!!");
-			
-		}
-	}
-
-	@Override
-	public int getComputerScore() {
-		return computer.getScore();
-	}
-
-	@Override
-	public int getHumanScore() {
-		return human.getScore();
+			System.out.println("game over!!!");	
+		}		
 	}
 }
