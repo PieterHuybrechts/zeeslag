@@ -185,7 +185,7 @@ public class BSGame implements BoardGame,Observer{
 		
 		if(humanAllSunk || computerAllSunk){
 			JOptionPane.showMessageDialog(null, "GameOver");
-			
+			this.endGame();
 		}		
 	}
 
