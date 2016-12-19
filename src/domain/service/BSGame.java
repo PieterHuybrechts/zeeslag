@@ -143,7 +143,30 @@ public class BSGame implements BoardGame{
 			notifyObservers();			
 		}catch(DomainException e){
 			
-		}	
+		}
+		
+		boolean humanAllSunk = true;
+		
+		for(Ship s : human.getBSBoard().getShips()){
+			if(!s.isSunken()){
+				humanAllSunk = false;
+				break;
+			}
+		}
+		
+		boolean computerAllSunk = true;
+		
+		for(Ship s : computer.getBSBoard().getShips()){
+			if(!s.isSunken()){
+				computerAllSunk = false;
+				break;
+			}
+		}
+		
+		if(humanAllSunk || computerAllSunk){
+			System.out.println("game over!!!");
+			
+		}
 	}
 
 	@Override
