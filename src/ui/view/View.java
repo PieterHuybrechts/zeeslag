@@ -17,6 +17,7 @@ import javax.swing.JRadioButton;
 
 import common.Observer;
 import domain.DomainException;
+import domain.model.EndedState;
 import domain.model.GameOverState;
 import domain.model.GameState;
 import domain.model.NewState;
@@ -186,7 +187,10 @@ public class View extends JFrame implements Observer{
 			player1Panel.setButtonsEnabled(false);
 			player2Panel.setButtonsEnabled(true);
 			startButton.setEnabled(false);
-		}else if(className.equals(GameOverState.class.getName())){
+		}else if(className.equals(EndedState.class.getName())){
+			player1Panel.setButtonsEnabled(false);
+			player2Panel.setButtonsEnabled(false);
+			JOptionPane.showMessageDialog(null, "GameOver");
 			
 		}
 		

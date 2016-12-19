@@ -146,8 +146,12 @@ public class BSGame implements BoardGame,Observer{
 	public void hit(Position pos) {
 		try{			
 			computer.hit(pos);
-			Computer c = (Computer) computer;
-			c.hit(human);
+			
+			if(currentState!=endedState){
+				Computer c = (Computer) computer;
+				c.hit(human);				
+			}
+			
 			notifyObservers();			
 		}catch(DomainException e){
 			
@@ -189,14 +193,12 @@ public class BSGame implements BoardGame,Observer{
 		}
 		
 		if(humanAllSunk || computerAllSunk){
-			JOptionPane.showMessageDialog(null, "GameOver");
 			this.endGame();
 		}		
 	}
 
 	@Override
 	public GameState getEndedState() {
-		// TODO Auto-generated method stub
 		return this.endedState;
 	}
 
