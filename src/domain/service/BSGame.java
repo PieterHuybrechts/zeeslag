@@ -9,7 +9,6 @@ import common.Observer;
 import domain.DomainException;
 import domain.model.Board;
 import domain.model.Computer;
-import domain.model.GameOverState;
 import domain.model.EndedState;
 import domain.model.GameState;
 import domain.model.Human;
@@ -28,7 +27,6 @@ public class BSGame implements BoardGame,Observer{
 	
 	private GameState newState = new NewState(this);
 	private GameState startedState = new StartedState(this);
-	private GameState gameOverState = new GameOverState(this);
 	private GameState endedState = new EndedState(this);
 	private GameState currentState= newState;
 	

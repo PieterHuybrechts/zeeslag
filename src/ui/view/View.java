@@ -18,7 +18,6 @@ import javax.swing.JRadioButton;
 import common.Observer;
 import domain.DomainException;
 import domain.model.EndedState;
-import domain.model.GameOverState;
 import domain.model.GameState;
 import domain.model.NewState;
 import domain.model.ShipEnum;
