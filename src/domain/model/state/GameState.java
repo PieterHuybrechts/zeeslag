@@ -1,4 +1,4 @@
-package domain.model;
+package domain.model.state;
 
 public interface GameState {
 	public void start();

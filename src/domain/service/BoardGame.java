@@ -1,11 +1,11 @@
 package domain.service;
 
-import common.Subject;
 import domain.model.Board;
-import domain.model.GameState;
 import domain.model.Ship;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
+import domain.model.observer.Subject;
+import domain.model.state.GameState;
 
 public interface BoardGame extends Subject{
 

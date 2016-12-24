@@ -3,21 +3,21 @@ package domain.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.Observer;
 import domain.DomainException;
 import domain.model.Board;
 import domain.model.Computer;
-import domain.model.EndedState;
-import domain.model.GameState;
 import domain.model.Human;
-import domain.model.NewState;
 import domain.model.Player;
 import domain.model.Ship;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
-import domain.model.StartedState;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
+import domain.model.observer.Observer;
+import domain.model.state.EndedState;
+import domain.model.state.GameState;
+import domain.model.state.NewState;
+import domain.model.state.StartedState;
 
 public class BSGame implements BoardGame,Observer{
 

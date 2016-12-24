@@ -1,4 +1,4 @@
-package app;
+package ui.app;
 
 import domain.DomainException;
 import ui.controller.Controller;

@@ -1,33 +1,29 @@
-package domain.model;
+package domain.model.state;
 
 import domain.service.BoardGame;
 
-public class StartedState implements GameState{
+public class EndedState implements GameState {
 	private BoardGame game;
-	public StartedState(BoardGame game){
+	public EndedState(BoardGame game){
 		this.game = game;
 	}
 	@Override
 	public void start() {
 		// TODO Auto-generated method stub
-		throw new IllegalStateException("Can't start a gaùe that is already started.");
+		throw new IllegalStateException("Ended game can't be started");
+		
 	}
-
-	/*@Override
-	public boolean isready() {
-		// TODO Auto-generated method stub
-		return false;
-	}*/
 
 	@Override
 	public void newGame() {
 		// TODO Auto-generated method stub
 		game.setState(game.getNewSate());
 	}
+
 	@Override
 	public void endGame() {
 		// TODO Auto-generated method stub
-		game.setState(game.getEndedState());
+		throw new IllegalStateException("A game that is ended can't be ended again");
 	}
 
 }

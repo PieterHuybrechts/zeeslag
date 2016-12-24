@@ -3,10 +3,10 @@ package domain.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import common.Observer;
-import common.Subject;
 import domain.DomainException;
 import domain.model.lib.Position;
+import domain.model.observer.Observer;
+import domain.model.observer.Subject;
 
 public class Ship implements Subject{
 

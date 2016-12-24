@@ -15,13 +15,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-import common.Observer;
 import domain.DomainException;
-import domain.model.EndedState;
-import domain.model.NewState;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
-import domain.model.StartedState;
+import domain.model.observer.Observer;
+import domain.model.state.EndedState;
+import domain.model.state.NewState;
+import domain.model.state.StartedState;
 import ui.controller.Controller;
 import ui.view.panels.PlayerPanel;
 

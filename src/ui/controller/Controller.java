@@ -3,11 +3,11 @@ package ui.controller;
 import domain.DomainException;
 import domain.model.BSBoard;
 import domain.model.Board;
-import domain.model.GameState;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
+import domain.model.state.GameState;
 import domain.service.GameFacade;
 import ui.view.View;
 

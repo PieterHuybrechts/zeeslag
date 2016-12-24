@@ -1,4 +1,4 @@
-package common;
+package domain.model.observer;
 
 public interface Observer {
 	

@@ -1,8 +1,8 @@
 package domain.model;
 
 import domain.DomainException;
-import domain.HitShipFactory;
-import domain.PlaceShipFactory;
+import domain.model.factory.HitShipFactory;
+import domain.model.factory.PlaceShipFactory;
 import domain.model.lib.Position;
 
 public class Computer extends Player{

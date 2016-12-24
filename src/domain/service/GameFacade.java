@@ -1,15 +1,15 @@
 package domain.service;
 
-import common.Observer;
 import domain.DomainException;
 import domain.model.BSBoard;
 import domain.model.Board;
-import domain.model.GameState;
 import domain.model.Ship;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
+import domain.model.observer.Observer;
+import domain.model.state.GameState;
 
 public class GameFacade {
 

@@ -1,4 +1,4 @@
-package domain;
+package domain.model.factory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,10 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import domain.model.HitShipStrategy;
+import domain.DomainException;
+import domain.model.PlaceShipStrategy;
 
-public class HitShipFactory {
-	public HitShipStrategy getHitShipStrategy() throws DomainException {
+public class PlaceShipFactory {
+	public PlaceShipStrategy getPlaceShipStrategy() throws DomainException {
 		Properties p = new Properties();
 
 		InputStream in;
@@ -21,12 +22,12 @@ public class HitShipFactory {
 			throw new DomainException("Properties file not found");
 		}
 
-		String className = (String) p.get("strathit");
+		String className = (String) p.get("strat");
 		
 		
 		try {
 			Class<?> clazz = Class.forName(className);
-			return (HitShipStrategy) clazz.newInstance();
+			return (PlaceShipStrategy) clazz.newInstance();
 		} catch (Exception e){
 			throw new DomainException("Strategy could not be initiated.");
 		}
