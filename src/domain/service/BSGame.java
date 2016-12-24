@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import common.Observer;
-import common.Subject;
 import domain.DomainException;
 import domain.model.Board;
 import domain.model.Computer;
