@@ -13,7 +13,7 @@ import domain.service.GameFacade;
 import ui.view.View;
 
 /**
- * @author Pieter Huybrechts
+ * @author Brecht Decuyper & Pieter Huybrechts
  */
 public class Controller {
 
