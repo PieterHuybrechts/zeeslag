@@ -58,8 +58,8 @@ public class GameFacade {
 		}
 	}
 	
-	public Board getBoard(){
-		return game.getBoard();
+	public Board getBoard(Boolean isHuman){
+		return game.getBoard(isHuman);
 	}
 	
 	public void addObserver(Observer o){

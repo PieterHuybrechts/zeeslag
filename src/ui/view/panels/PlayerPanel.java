@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import domain.DomainException;
 import domain.model.BSBoard;
+import domain.model.Board;
 import domain.model.Cell;
 import domain.model.Ship;
 import domain.model.ShipEnum;
@@ -33,7 +34,6 @@ public class PlayerPanel extends JPanel {
 
 	private Controller controller;
 	private boolean humanPlayer;
-	private BSBoard board;
 	private JButton[][] buttonMatrix;
 	private ShipOrientationEnum selectedOrientation;
 	private ShipEnum selectedShipType;
@@ -51,15 +51,14 @@ public class PlayerPanel extends JPanel {
 		int score;
 
 		if (humanPlayer) {
-			board = c.GetHumanBoard();
 			score = c.getHumanScore();
 			name = c.getNameHuman();
 		} else {
-			board = c.getComputerBoard();
 			score = c.getComputerScore();
 			name = c.getNameComputer();
 		}
 
+		Board board = c.getBoard(humanPlayer);
 		boardWidth = board.getSize().getWidth();
 		boardHeight = board.getSize().getHeight();
 
@@ -113,10 +112,8 @@ public class PlayerPanel extends JPanel {
 		int score;
 		
 		if (isHumanBoard()) {
-			board = controller.GetHumanBoard();
 			score = controller.getHumanScore();
 		} else {
-			board = controller.getComputerBoard();
 			score = controller.getComputerScore();
 		}
 		
@@ -126,6 +123,7 @@ public class PlayerPanel extends JPanel {
 	}
 
 	private void updateColors() {
+		BSBoard board = (BSBoard) this.controller.getBoard(humanPlayer);
 		if (isHumanBoard()) {
 			for (Ship s : board.getShips()) {
 				int xPos = s.getPos().getX();
@@ -161,6 +159,7 @@ public class PlayerPanel extends JPanel {
 	}
 
 	public void setButtonsEnabled(boolean enabled) {
+		BSBoard board = (BSBoard) controller.getBoard(humanPlayer);
 		for (int y = 0; y < board.getSize().getHeight(); y++) {
 			for (int x = 0; x < board.getSize().getWidth(); x++) {
 				buttonMatrix[x][y].setEnabled(enabled);
@@ -172,6 +171,7 @@ public class PlayerPanel extends JPanel {
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			if (isHumanBoard()) {
+				BSBoard board = (BSBoard) controller.getBoard(true);
 				if (board.isValidMove(selectedShipType, selectedOrientation, getPos(e))) {
 					changeColor(e, new Color(255, 255, 255));
 				} else {
@@ -213,6 +213,7 @@ public class PlayerPanel extends JPanel {
 			Position p = getPos(e);
 
 			if (isHumanBoard()) {
+				BSBoard board = (BSBoard) controller.getBoard(true);
 
 				int x = p.getX();
 				int y = p.getY();

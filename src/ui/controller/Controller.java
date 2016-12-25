@@ -71,8 +71,8 @@ public class Controller {
 		return facade.getNameHuman();
 	}
 
-	public Board getBoard(){
-		return facade.getBoard();
+	public Board getBoard(Boolean isHuman){
+		return facade.getBoard(isHuman);
 	}
 
 	public boolean isValidMove(ShipEnum type, ShipOrientationEnum orientation, Position pos) {

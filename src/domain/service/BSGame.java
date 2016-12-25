@@ -81,8 +81,12 @@ public class BSGame implements BoardGame,Observer{
 	}
 
 	@Override
-	public Board getBoard() {
-		return human.getBoard();
+	public Board getBoard(Boolean isHuman) {
+		if (isHuman) {
+			return this.human.getBoard();
+		} else {
+			return this.computer.getBoard();
+		}
 	}
 
 	@Override

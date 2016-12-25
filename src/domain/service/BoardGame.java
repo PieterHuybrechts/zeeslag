@@ -13,7 +13,7 @@ public interface BoardGame extends Subject{
 	public void start();
 	public BoardDimension getBoardSize();
 	public void addPion(Ship ship);
-	public Board getBoard();
+	public Board getBoard(Boolean isHuman);
 	public void setState(GameState state);
 	public void newGame();
 	public GameState getStartedState();
