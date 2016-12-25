@@ -5,6 +5,9 @@ import domain.model.factory.HitShipFactory;
 import domain.model.factory.PlaceShipFactory;
 import domain.model.lib.Position;
 
+/**
+ * @author Thomas Vanzegbroeck & Pieter Huybrechts
+ */
 public class Computer extends Player{
 	
 	PlaceShipStrategy strat;

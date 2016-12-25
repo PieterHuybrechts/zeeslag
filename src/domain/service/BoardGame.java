@@ -8,6 +8,9 @@ import domain.model.lib.Position;
 import domain.model.observer.Subject;
 import domain.model.state.GameState;
 
+/**
+ * @author Pieter Huybrechts
+ */
 public interface BoardGame extends Subject{
 
 	public void start();

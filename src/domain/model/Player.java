@@ -3,6 +3,9 @@ package domain.model;
 import domain.DomainException;
 import domain.model.lib.Position;
 
+/**
+ * @author Thomas Vanzegbroeck
+ */
 public abstract class Player {
 
 	private String name;

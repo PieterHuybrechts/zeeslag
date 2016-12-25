@@ -9,6 +9,9 @@ import java.util.Properties;
 import domain.DomainException;
 import domain.model.HitShipStrategy;
 
+/**
+ * @author Thomas Vanzegbroeck & Brecht Decuyper
+ */
 public class HitShipFactory {
 	public HitShipStrategy getHitShipStrategy() throws DomainException {
 		Properties p = new Properties();

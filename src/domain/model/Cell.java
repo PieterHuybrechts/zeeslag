@@ -2,6 +2,9 @@ package domain.model;
 
 import domain.DomainException;
 
+/**
+ * @author Pieter Huybrechts & Brecht Decuyper
+ */
 public class Cell {
 
 	private boolean hit;

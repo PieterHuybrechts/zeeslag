@@ -1,5 +1,8 @@
 package app;
 
+/**
+ * @author Pieter Huybrechts & Brecht Decuyper
+ */
 import domain.DomainException;
 import ui.controller.Controller;
 

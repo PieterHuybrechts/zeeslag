@@ -24,6 +24,9 @@ import java.awt.event.MouseListener;
 import java.awt.Color;
 import java.awt.Dimension;
 
+/**
+ * @author Pieter Huybrechts
+ */
 public class PlayerPanel extends JPanel {
 
 	/**

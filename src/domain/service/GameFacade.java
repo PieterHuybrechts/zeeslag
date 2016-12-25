@@ -12,6 +12,9 @@ import domain.model.lib.Position;
 import domain.model.observer.Observer;
 import domain.model.state.GameState;
 
+/**
+ * @author Pieter Huybrechts, Thomas Vanzegbroeck & Brecht Decuyper
+ */
 public class GameFacade {
 
 	private BoardGame game;

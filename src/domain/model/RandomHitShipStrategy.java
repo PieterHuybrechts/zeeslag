@@ -6,6 +6,9 @@ import java.util.Random;
 
 import domain.model.lib.Position;
 
+/**
+ * @author Thomas Vanzegbroeck & Brecht Decuyper
+ */
 public class RandomHitShipStrategy implements HitShipStrategy {
 	
 	private List<Position> nothittedPostion = new ArrayList<Position>();

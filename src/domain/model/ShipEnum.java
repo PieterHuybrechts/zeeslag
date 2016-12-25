@@ -1,5 +1,8 @@
 package domain.model;
 
+/**
+ * @author Brecht Decuyper
+ */
 public enum ShipEnum {
 	VLIEGDEKSCHIP ("Vliegdekschip", 5),
 	SLAGSCHIP ("Slagschip", 4),

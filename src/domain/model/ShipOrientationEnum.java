@@ -1,5 +1,8 @@
 package domain.model;
 
+/**
+ * @author Pieter Huybrechts
+ */
 public enum ShipOrientationEnum {
 
 	HORIZONTAL("Horizontaal"),

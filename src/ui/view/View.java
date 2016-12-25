@@ -25,6 +25,9 @@ import domain.model.state.StartedState;
 import ui.controller.Controller;
 import ui.view.panels.PlayerPanel;
 
+/**
+ * @author Pieter Huybrechts
+ */
 public class View extends JFrame implements Observer{
 
 	private static final long serialVersionUID = -7999885517041228366L;

@@ -5,6 +5,9 @@ import java.util.Random;
 import domain.DomainException;
 import domain.model.lib.Position;
 
+/**
+ * @author Thomas Vanzegbroeck
+ */
 public class RandomStrategy implements PlaceShipStrategy{
 
 	@Override

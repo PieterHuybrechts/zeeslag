@@ -1,5 +1,8 @@
 package domain.model.lib;
 
+/**
+ * @author Brecht Decuyper
+ */
 public class Position {
 	
 	private int x, y;

@@ -1,10 +1,10 @@
 package domain;
 
+/**
+ * @author Brecht Decuyper
+ */
 public class DomainException extends Exception{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7506237481098417807L;
 
 	public DomainException(){

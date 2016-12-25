@@ -2,6 +2,9 @@ package domain.model.state;
 
 import domain.service.BoardGame;
 
+/**
+ * @author Thomas Vanzegbroeck & Pieter Huybrechts
+ */
 public class NewState implements GameState {
 	private BoardGame game;
 	public NewState(BoardGame game){
@@ -9,24 +12,15 @@ public class NewState implements GameState {
 	}
 	@Override
 	public void start() {
-		// TODO Auto-generated method stub
 		game.setState(game.getStartedState());
 	}
 
-	/*@Override
-	public boolean isready() {
-		// TODO Auto-generated method stub
-		return false;
-	}*/
-
 	@Override
 	public void newGame() {
-		// TODO Auto-generated method stub
 		throw new IllegalStateException("Can't start a new game when game isn't started yet.");
 	}
 	@Override
 	public void endGame() {
-		// TODO Auto-generated method stub
 		throw new IllegalStateException("A game that isn't started yet can't be ended");
 	}
 

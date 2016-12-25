@@ -19,6 +19,9 @@ import domain.model.state.GameState;
 import domain.model.state.NewState;
 import domain.model.state.StartedState;
 
+/**
+ * @author Pieter Huybrechts
+ */
 public class BSGame implements BoardGame,Observer{
 
 	private final List<Observer> observers = new ArrayList<Observer>();

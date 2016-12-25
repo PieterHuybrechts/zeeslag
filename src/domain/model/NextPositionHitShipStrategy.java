@@ -6,6 +6,9 @@ import java.util.List;
 
 import domain.model.lib.Position;
 
+/**
+ * @author Thomas Vanzegbroeck & Brecht Decuyper
+ */
 public class NextPositionHitShipStrategy  implements HitShipStrategy {
 
 	
@@ -29,7 +32,6 @@ public class NextPositionHitShipStrategy  implements HitShipStrategy {
 
 	@Override
 	public Position hitShip() {
-		// TODO Auto-generated method stub
 		if(nothittedPostion!=null && !nothittedPostion.isEmpty()){
 			
 			Position pos = this.nothittedPostion.get(0);

@@ -9,6 +9,9 @@ import java.util.Properties;
 import domain.DomainException;
 import domain.model.PlaceShipStrategy;
 
+/**
+ * @author Thomas Vanzegbroeck & Pieter Huybrechts
+ */
 public class PlaceShipFactory {
 	public PlaceShipStrategy getPlaceShipStrategy() throws DomainException {
 		Properties p = new Properties();

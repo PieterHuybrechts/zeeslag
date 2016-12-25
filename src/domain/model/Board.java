@@ -4,6 +4,9 @@ import domain.DomainException;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
 
+/**
+ * @author Thomas Vanzegbroeck & Pieter Huybrechts
+ */
 public interface Board {
 
 	public BoardDimension getSize();

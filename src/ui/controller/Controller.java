@@ -12,6 +12,9 @@ import domain.model.state.GameState;
 import domain.service.GameFacade;
 import ui.view.View;
 
+/**
+ * @author Pieter Huybrechts
+ */
 public class Controller {
 
 	private GameFacade facade;

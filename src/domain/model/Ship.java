@@ -8,6 +8,9 @@ import domain.model.lib.Position;
 import domain.model.observer.Observer;
 import domain.model.observer.Subject;
 
+/**
+ * @author Pieter Huybrechts & Brecht Decuyper
+ */
 public class Ship implements Subject{
 
 	private String name;
