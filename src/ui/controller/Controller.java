@@ -3,6 +3,7 @@ package ui.controller;
 import domain.DomainException;
 import domain.model.BSBoard;
 import domain.model.Board;
+import domain.model.Player;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
 import domain.model.lib.BoardDimension;
@@ -112,6 +113,16 @@ public class Controller {
 	public void quit() {
 		System.exit(1);
 		
+	}
+private Player getWinner(){
+	return this.facade.getWinner();
+}
+	public String getWinnerName() {
+		
+		return this.getWinner().getName();
+	}
+	public int getWinnerScore() {
+		return this.getWinner().getScore();
 	}
 
 }

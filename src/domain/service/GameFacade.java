@@ -3,6 +3,7 @@ package domain.service;
 import domain.DomainException;
 import domain.model.BSBoard;
 import domain.model.Board;
+import domain.model.Player;
 import domain.model.Ship;
 import domain.model.ShipEnum;
 import domain.model.ShipOrientationEnum;
@@ -103,6 +104,11 @@ public class GameFacade {
 	
 	public GameState getGameState(){
 		return game.getCurrentState();
+	}
+
+	public Player getWinner() {
+		// TODO Auto-generated method stub
+		return game.getWinner();
 	}
 
 

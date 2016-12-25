@@ -27,7 +27,7 @@ public class BSGame implements BoardGame,Observer{
 	private GameState startedState = new StartedState(this);
 	private GameState endedState = new EndedState(this);
 	private GameState currentState= newState;
-	
+	private Player winner;
 	private Player human;
 	private Player computer;
 	
@@ -193,6 +193,11 @@ public class BSGame implements BoardGame,Observer{
 		
 		if(humanAllSunk || computerAllSunk){
 			this.endGame();
+			if(humanAllSunk){
+				this.winner = this.computer;
+			} else {
+				this.winner = this.human;
+			}
 		}		
 	}
 
@@ -205,5 +210,11 @@ public class BSGame implements BoardGame,Observer{
 	public void endGame() {
 		this.currentState.endGame();
 		
+	}
+
+	@Override
+	public Player getWinner() {
+		// TODO Auto-generated method stub
+		return this.winner;
 	}
 }

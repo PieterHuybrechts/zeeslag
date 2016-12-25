@@ -1,6 +1,7 @@
 package domain.service;
 
 import domain.model.Board;
+import domain.model.Player;
 import domain.model.Ship;
 import domain.model.lib.BoardDimension;
 import domain.model.lib.Position;
@@ -24,6 +25,6 @@ public interface BoardGame extends Subject{
 	public int getComputerScore();
 	public int getHumanScore();
 	public GameState getCurrentState();
-	
+	public Player getWinner();
 	
 }
